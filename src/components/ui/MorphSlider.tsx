@@ -664,6 +664,11 @@ export const MorphSlider = forwardRef<MorphSliderHandle, MorphSliderProps>(funct
   const engineRef = useRef<MorphEngine | null>(null);
   const [index, setIndex] = useState(startIndex);
   const [hovering, setHovering] = useState(false);
+  /** true quando o WebGL não pôde ser inicializado (VM sem GPU, driver
+   * antigo, contexto perdido logo no início) — troca o morph por uma
+   * imagem estática em vez de deixar o erro do `ogl` derrubar a árvore
+   * React inteira (o app não tem Error Boundary). */
+  const [webglFailed, setWebglFailed] = useState(false);
 
   const optsRef = useRef<MorphSliderOptions>({
     transition,
@@ -682,30 +687,73 @@ export const MorphSlider = forwardRef<MorphSliderHandle, MorphSliderProps>(funct
     if (!containerRef.current) return undefined;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const engine = new MorphEngine(containerRef.current, {
-      items,
-      startIndex,
-      reducedMotion,
-      dprCap: 2,
-      getOptions: () => optsRef.current,
-      onIndexChange: (i) => {
-        setIndex(i);
-        onIndexChange?.(i);
-      },
-    });
+    let engine: MorphEngine | null = null;
+    try {
+      engine = new MorphEngine(containerRef.current, {
+        items,
+        startIndex,
+        reducedMotion,
+        dprCap: 2,
+        getOptions: () => optsRef.current,
+        onIndexChange: (i) => {
+          setIndex(i);
+          onIndexChange?.(i);
+        },
+      });
+    } catch (err) {
+      // ogl lança quando nem WebGL2 nem WebGL1 estão disponíveis — sem este
+      // try/catch essa exceção síncrona escaparia do efeito sem nenhum
+      // Error Boundary para pará-la.
+      console.error('MorphSlider: WebGL indisponível, usando modo estático.', err);
+      setWebglFailed(true);
+      setIndex(startIndex);
+      return undefined;
+    }
+
     engineRef.current = engine;
     setIndex(startIndex);
 
     return () => {
-      engine.destroy();
+      engine?.destroy();
       engineRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, startIndex]);
 
-  const handleNext = useCallback(() => engineRef.current?.next(), []);
-  const handlePrev = useCallback(() => engineRef.current?.prev(), []);
-  const handleGoTo = useCallback((i: number) => engineRef.current?.goToIndex(i), []);
+  const handleNext = useCallback(() => {
+    if (engineRef.current) {
+      engineRef.current.next();
+      return;
+    }
+    if (items.length < 2) return;
+    const next = (index + 1) % items.length;
+    setIndex(next);
+    onIndexChange?.(next);
+  }, [index, items, onIndexChange]);
+
+  const handlePrev = useCallback(() => {
+    if (engineRef.current) {
+      engineRef.current.prev();
+      return;
+    }
+    if (items.length < 2) return;
+    const next = (index - 1 + items.length) % items.length;
+    setIndex(next);
+    onIndexChange?.(next);
+  }, [index, items, onIndexChange]);
+
+  const handleGoTo = useCallback(
+    (i: number) => {
+      if (engineRef.current) {
+        engineRef.current.goToIndex(i);
+        return;
+      }
+      if (i === index) return;
+      setIndex(i);
+      onIndexChange?.(i);
+    },
+    [index, onIndexChange],
+  );
 
   useImperativeHandle(ref, () => ({ next: handleNext, prev: handlePrev, goTo: handleGoTo }), [
     handleNext,
@@ -715,9 +763,9 @@ export const MorphSlider = forwardRef<MorphSliderHandle, MorphSliderProps>(funct
 
   useEffect(() => {
     if (!autoplay || hovering) return undefined;
-    const id = setTimeout(() => engineRef.current?.next(), Math.max(autoplayDelay, 1) * 1000);
+    const id = setTimeout(() => handleNext(), Math.max(autoplayDelay, 1) * 1000);
     return () => clearTimeout(id);
-  }, [autoplay, autoplayDelay, hovering, index]);
+  }, [autoplay, autoplayDelay, hovering, index, handleNext]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -802,7 +850,17 @@ export const MorphSlider = forwardRef<MorphSliderHandle, MorphSliderProps>(funct
         aria-label={ariaLabel}
         tabIndex={0}
         onKeyDown={onKeyDown}
-      />
+      >
+        {webglFailed && items[index] && (
+          <img
+            key={index}
+            src={items[index].image}
+            alt={items[index].caption ?? ''}
+            loading="lazy"
+            className="morph-slider-fallback-image"
+          />
+        )}
+      </div>
 
       {children}
 

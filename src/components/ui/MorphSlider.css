@@ -29,6 +29,26 @@
   height: 100%;
 }
 
+/* Usada só quando o WebGL não está disponível — troca simples de imagem
+   no lugar do morph, em vez de deixar o palco vazio. */
+.morph-slider-fallback-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: morph-slider-fallback-fade 0.4s ease;
+}
+
+@keyframes morph-slider-fallback-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .morph-slider-caption {
   position: absolute;
   left: 22px;
@@ -164,7 +184,8 @@
 @media (prefers-reduced-motion: reduce) {
   .morph-slider-caption-text,
   .morph-slider-btn,
-  .morph-slider-dot {
+  .morph-slider-dot,
+  .morph-slider-fallback-image {
     animation: none;
     transition: none;
   }
