@@ -1,0 +1,12 @@
+export { Hero } from './Hero';
+export { Differentials } from './Differentials';
+export { About } from './About';
+export { EducationLevels } from './EducationLevels';
+export { Methodology } from './Methodology';
+export { Infrastructure } from './Infrastructure';
+export { Stats } from './Stats';
+export { Testimonials } from './Testimonials';
+export { News } from './News';
+export { Faq } from './Faq';
+export { CtaFinal } from './CtaFinal';
+export { PageHero } from './PageHero';

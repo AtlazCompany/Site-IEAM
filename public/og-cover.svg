@@ -1,0 +1,20 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1B3A2F" />
+      <stop offset="1" stop-color="#0E1713" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="1060" cy="90" r="230" fill="#2F6E4E" opacity="0.22" />
+  <circle cx="70" cy="590" r="200" fill="#D8B968" opacity="0.12" />
+
+  <circle cx="134" cy="134" r="46" stroke="#D8B968" stroke-width="2" />
+  <path d="M112 122c8.6-5.6 29.4-5.6 38 0v26c-8.6-5.6-29.4-5.6-38 0z" stroke="#F4F4EF" stroke-width="2" stroke-linejoin="round" />
+  <path d="M131 122v26" stroke="#F4F4EF" stroke-width="2" />
+
+  <text x="90" y="290" font-family="Georgia, serif" font-size="66" font-weight="600" fill="#F4F4EF">IEAM</text>
+  <text x="90" y="335" font-family="Arial, sans-serif" font-size="24" letter-spacing="2" fill="#8FB79B">INSTITUTO EDUCACIONAL AFONSO MAFRENSE</text>
+  <text x="90" y="425" font-family="Georgia, serif" font-style="italic" font-size="40" font-weight="500" fill="#F4F4EF">Uma marca de aprovação.</text>
+  <text x="90" y="470" font-family="Arial, sans-serif" font-size="22" fill="#C4C7BC">Teresina, PI · mais de 30 anos de tradição</text>
+</svg>
