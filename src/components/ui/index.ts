@@ -11,3 +11,5 @@ export { PageLoader } from './PageLoader';
 export { InstagramIcon, FacebookIcon, YoutubeIcon } from './SocialIcons';
 export { ShaderBackground } from './ShaderBackground';
 export { DeferredSection } from './DeferredSection';
+export { MorphSlider } from './MorphSlider';
+export type { MorphSliderItem, MorphSliderHandle, MorphTransition } from './MorphSlider';

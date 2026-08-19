@@ -12,9 +12,6 @@ import {
   Rocket,
   ClipboardCheck,
   LineChart,
-  Building2,
-  Library,
-  Microscope,
   Presentation,
   Wifi,
 } from 'lucide-react';
@@ -22,7 +19,6 @@ import type {
   Differential,
   EducationLevel,
   MethodologyStep,
-  GalleryItem,
   StatItem,
   Testimonial,
   NewsItem,
@@ -131,23 +127,6 @@ export const METHODOLOGY_STEPS: MethodologyStep[] = [
     icon: LineChart,
   },
 ];
-
-export const GALLERY_ITEMS: GalleryItem[] = [
-  { id: 'g1', title: 'Laboratório de Ciências', category: 'Laboratórios' },
-  { id: 'g2', title: 'Laboratório de Informática', category: 'Laboratórios' },
-  { id: 'g3', title: 'Biblioteca Central', category: 'Biblioteca' },
-  { id: 'g4', title: 'Quadra Poliesportiva', category: 'Esportes' },
-  { id: 'g5', title: 'Salas Climatizadas', category: 'Salas de Aula' },
-  { id: 'g6', title: 'Auditório', category: 'Espaços Comuns' },
-];
-
-export const GALLERY_ICONS: Record<string, typeof Building2> = {
-  Laboratórios: Microscope,
-  Biblioteca: Library,
-  Esportes: Dumbbell,
-  'Salas de Aula': Presentation,
-  'Espaços Comuns': Building2,
-};
 
 /**
  * Apenas fatos confirmados entram aqui. Não adicionar números de alunos,

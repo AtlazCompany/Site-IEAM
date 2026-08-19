@@ -52,7 +52,7 @@ export function Hero() {
   return (
     <section
       ref={parallaxRef}
-      className="relative isolate flex min-h-[92vh] items-center overflow-hidden bg-brand-950 pt-32 pb-20 text-white"
+      className="relative isolate flex items-center overflow-hidden bg-brand-950 pt-28 pb-14 text-white sm:min-h-[92vh] sm:pt-32 sm:pb-20"
     >
       {/* Camada atmosférica — shader "Mesh drift" atrás do conteúdo, lento e sutil */}
       <ShaderBackground className="-z-20" speed={0.85} intensity={0.9} />
@@ -140,9 +140,35 @@ export function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
+            {/*
+              Mobile: tira de chips em scroll horizontal — o painel de vidro
+              2×2 completo (abaixo) empilhava ~400px sob o texto do Hero,
+              quase dobrando a altura da seção no celular sem agregar
+              informação nova.
+            */}
+            <div
+              className="glass-dark -mx-1 flex gap-3 overflow-x-auto rounded-2xl p-3 sm:hidden"
+              style={{ scrollbarWidth: 'none' }}
+            >
+              {INDICATORS.map(({ icon: Icon, value, label }) => (
+                <div
+                  key={label}
+                  className="flex shrink-0 items-center gap-3 rounded-xl bg-white/5 px-4 py-3 ring-1 ring-inset ring-white/10"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gold-400/10 text-gold-300">
+                    <Icon className="h-4 w-4" strokeWidth={2} />
+                  </span>
+                  <div>
+                    <div className="font-display text-sm font-semibold leading-tight text-white">{value}</div>
+                    <div className="label-mono text-[9px] leading-tight text-white/55">{label}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <motion.div
               style={{ x: panelX, y: panelY }}
-              className="glass-dark rounded-3xl border border-white/10 p-6 shadow-[var(--shadow-lift)] sm:p-8"
+              className="glass-dark hidden rounded-3xl border border-white/10 p-6 shadow-[var(--shadow-lift)] sm:block sm:p-8"
             >
               <div className="grid grid-cols-2 gap-5">
                 {INDICATORS.map(({ icon: Icon, value, label }) => (

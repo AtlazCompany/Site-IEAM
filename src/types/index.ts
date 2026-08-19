@@ -27,12 +27,6 @@ export interface MethodologyStep {
   icon: LucideIcon;
 }
 
-export interface GalleryItem {
-  id: string;
-  title: string;
-  category: string;
-}
-
 export interface StatItem {
   icon: LucideIcon;
   value: number;
