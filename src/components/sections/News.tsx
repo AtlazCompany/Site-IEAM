@@ -1,25 +1,27 @@
 import { ArrowRight, Calendar } from 'lucide-react';
-import { Section, SectionHeading, Card, Button, Badge, StaggerGroup, StaggerItem, HandwrittenNote } from '@/components/ui';
+import { Section, SectionHeading, Card, Button, Badge, StaggerGroup, StaggerItem, AnimatedEquation } from '@/components/ui';
 import { NEWS_ITEMS } from '@/constants/content';
 
 export function News() {
   return (
     <Section background="white">
       <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-end">
-        <div>
+        <div className="flex flex-col items-start gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-2">
           <SectionHeading
             eyebrow="Notícias"
             title="O que está acontecendo no IEAM"
             align="left"
-            className="mx-0 text-left"
+            className="mx-0 sm:max-w-lg text-left"
           />
           {/* Honesto sobre o estado atual: os 3 itens abaixo são exemplos
               ("Em breve"), não notícias reais publicadas ainda — em vez de
               fingir que é conteúdo pronto, a própria seção assume isso como
               parte da história ainda sendo escrita. */}
-          <HandwrittenNote rotate={-2} delay={0.3} className="mt-2 text-lg text-ink-400">
-            as próximas páginas desta história ainda estão sendo escritas
-          </HandwrittenNote>
+          <AnimatedEquation
+            expression="as próximas páginas desta história ainda estão sendo escritas"
+            delay={0.3}
+            className="-rotate-2 text-2xl leading-snug text-ink-400 sm:max-w-[13rem] sm:text-[1.75rem]"
+          />
         </div>
         <Button href="/noticias" variant="outline-dark" icon={<ArrowRight className="h-4 w-4" />}>
           Ver todas as notícias
