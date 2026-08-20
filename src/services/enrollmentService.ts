@@ -16,6 +16,11 @@ function effectiveWhatsapp(values: EnrollmentSchema) {
   return values.sameAsPhone ? values.phone : values.whatsapp;
 }
 
+function formatBirthDate(value: string): string {
+  const date = new Date(`${value}T00:00:00`);
+  return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('pt-BR');
+}
+
 export function buildSubmissionPayload(values: EnrollmentSchema) {
   return {
     subject: `Novo interesse de matrícula — ${values.studentName}`,
@@ -25,7 +30,7 @@ export function buildSubmissionPayload(values: EnrollmentSchema) {
     shift: values.shift ? labelFor(SHIFT_OPTIONS, values.shift) : null,
     student: {
       name: values.studentName,
-      birthDate: values.birthDate,
+      birthDate: values.birthDate ? formatBirthDate(values.birthDate) : values.birthDate,
     },
     guardian: {
       name: values.guardianName,
