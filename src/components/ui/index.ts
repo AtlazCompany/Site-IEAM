@@ -13,4 +13,5 @@ export { ShaderBackground } from './ShaderBackground';
 export { DeferredSection } from './DeferredSection';
 export { MorphSlider } from './MorphSlider';
 export type { MorphSliderItem, MorphSliderHandle, MorphTransition } from './MorphSlider';
-export { HandDrawnLine, ChalkUnderline, AnimatedEquation, HandDrawnArrow, HandwrittenNote } from './sketches';
+export { StrokeText } from './StrokeText';
+export { HandDrawnLine, ChalkUnderline, AnimatedEquation, HandDrawnArrow, HandwrittenNote, ChalkDoodle, CircledWord } from './sketches';

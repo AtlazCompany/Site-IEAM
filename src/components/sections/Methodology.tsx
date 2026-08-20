@@ -1,7 +1,20 @@
 import { motion } from 'framer-motion';
-import { Section, SectionHeading, Reveal, HandDrawnLine, AnimatedEquation } from '@/components/ui';
+import { Section, SectionHeading, Reveal, HandDrawnLine, AnimatedEquation, ChalkDoodle } from '@/components/ui';
 import { SKETCH_PATHS } from '@/components/ui/sketches/sketchPaths';
+import type { DoodleName } from '@/components/ui/sketches/sketchPaths';
 import { METHODOLOGY_STEPS } from '@/constants/content';
+import { cn } from '@/utils/cn';
+
+/**
+ * Uma anotação matemática por passo (exceto o 05, que já tem seu próprio
+ * easter egg da conta corrigida) — vive na coluna vazia ao lado do card, não
+ * mais espremida no canto do ícone, porque esse canto nunca teve espaço de
+ * verdade para um texto legível. Cada uma vem acompanhada de um símbolo
+ * desenhado traço a traço (mesmo mecanismo dos doodles de "Por que o
+ * IEAM", mas com símbolos matemáticos em vez de ilustrações infantis).
+ */
+const STEP_EXPRESSIONS = ['2 + 3 = 5', '√49 = 7', '{ }', '50% + 50% = 100%'] as const;
+const STEP_SYMBOLS: DoodleName[] = ['check', 'root', 'multiply', 'divide'];
 
 export function Methodology() {
   return (
@@ -45,15 +58,6 @@ export function Methodology() {
                     className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600"
                   >
                     <Icon className="h-6 w-6" strokeWidth={2} />
-                    {/* Único ponto do site com uma pista de "código" —
-                        acompanha o passo de tecnologia, bem sutil. */}
-                    {i === 2 && (
-                      <AnimatedEquation
-                        expression="{ }"
-                        delay={0.15}
-                        className="absolute -right-1.5 -top-1.5 text-sm leading-none text-gold-500"
-                      />
-                    )}
                   </motion.span>
                   <div>
                     <span className="text-xs label-mono text-gold-600">Passo {step}</span>
@@ -101,7 +105,27 @@ export function Methodology() {
                 }`}
               />
 
-              <div className={i % 2 === 0 ? 'hidden lg:order-2 lg:block' : 'hidden lg:order-1 lg:block'} />
+              <div
+                className={cn(
+                  'hidden items-center gap-4 lg:flex',
+                  i % 2 === 0 ? 'lg:order-2 lg:justify-start lg:pl-6' : 'lg:order-1 lg:justify-end lg:pr-6',
+                )}
+                aria-hidden="true"
+              >
+                {i !== 4 && i % 2 !== 0 && (
+                  <ChalkDoodle name={STEP_SYMBOLS[i]} rotate={-6} strokeWidth={3} className="h-10 w-10 shrink-0 text-brand-400/50" delay={0.1} />
+                )}
+                {i !== 4 && (
+                  <AnimatedEquation
+                    expression={STEP_EXPRESSIONS[i]}
+                    delay={0.2}
+                    className={cn('text-3xl text-gold-500/55 xl:text-4xl', i % 2 === 0 ? '-rotate-2' : 'rotate-2')}
+                  />
+                )}
+                {i !== 4 && i % 2 === 0 && (
+                  <ChalkDoodle name={STEP_SYMBOLS[i]} rotate={6} strokeWidth={3} className="h-10 w-10 shrink-0 text-brand-400/50" delay={0.1} />
+                )}
+              </div>
             </div>
           ))}
         </div>

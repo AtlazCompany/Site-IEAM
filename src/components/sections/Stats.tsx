@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Section, SectionHeading, CountUp, Reveal, StaggerGroup, StaggerItem } from '@/components/ui';
+import { Section, SectionHeading, CountUp, Reveal, StaggerGroup, StaggerItem, ChalkDoodle } from '@/components/ui';
 import { CONFIRMED_TENURE, TRUST_POINTS } from '@/constants/content';
 
 // Duração do CountUp — o traço de selo só começa a se fechar quando o
@@ -7,7 +7,7 @@ import { CONFIRMED_TENURE, TRUST_POINTS } from '@/constants/content';
 const COUNT_DURATION = 1.6;
 
 export function Stats() {
-  const { icon: TenureIcon, value, suffix, label } = CONFIRMED_TENURE;
+  const { value, suffix, label } = CONFIRMED_TENURE;
 
   return (
     <Section background="white">
@@ -22,9 +22,9 @@ export function Stats() {
           <motion.div
             whileHover={{ scale: 1.03 }}
             transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-            className="relative flex h-40 w-40 items-center justify-center rounded-full border-[1.5px] border-gold-400 sm:h-48 sm:w-48"
+            className="relative flex h-56 w-56 items-center justify-center rounded-full border-2 border-gold-400 sm:h-64 sm:w-64"
           >
-            <div className="absolute inset-[8px] rounded-full border border-ink-200" />
+            <div className="absolute inset-[10px] rounded-full border border-ink-200" />
             {/*
               O selo se "fecha" assim que o número termina de contar — não é
               um enfeite girando à toa, é a virada de tom da jornada: daqui
@@ -47,10 +47,15 @@ export function Stats() {
               />
             </svg>
             <div className="flex flex-col items-center">
-              <p className="font-display text-3xl font-semibold tracking-tight text-brand-950 sm:text-4xl">
+              <p className="font-display text-4xl font-semibold tracking-tight text-brand-950 sm:text-5xl">
                 <CountUp value={value} suffix={suffix} duration={COUNT_DURATION} />
               </p>
-              <TenureIcon className="mt-1.5 h-5 w-5 text-gold-600" strokeWidth={1.75} />
+              <ChalkDoodle
+                name="graduationCap"
+                strokeWidth={2.5}
+                delay={COUNT_DURATION * 0.6}
+                className="mt-2 h-9 w-9 text-gold-600 sm:h-10 sm:w-10"
+              />
             </div>
           </motion.div>
           <p className="label-mono mt-4 text-center text-[11px] text-ink-500">{label}</p>

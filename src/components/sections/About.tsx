@@ -2,8 +2,7 @@ import { useRef, useState } from 'react';
 import type { KeyboardEvent, MutableRefObject, ReactNode } from 'react';
 import { Compass, Eye, HeartHandshake, Landmark, ArrowRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Section, Badge, Button, Reveal, HandDrawnLine } from '@/components/ui';
-import { SKETCH_PATHS } from '@/components/ui/sketches/sketchPaths';
+import { Section, Badge, Button, Reveal, HandDrawnLine, CircledWord } from '@/components/ui';
 import { InstitutionGallery } from './InstitutionGallery';
 import type { GalleryCategory } from '@/constants/gallery';
 import { cn } from '@/utils/cn';
@@ -50,32 +49,6 @@ const PILLARS: { id: GalleryCategory; label: string; icon: typeof Landmark; text
  * explicação exibida.
  */
 const VALORES_WORDS = ['Ética', 'Disciplina', 'Acolhimento', 'Inovação', 'Compromisso'];
-
-/**
- * Círculo desenhado à mão ao redor de uma palavra — desenha e, depois de
- * um instante, some suavemente (como uma marcação feita "ao vivo" sobre o
- * texto, não um sublinhado permanente).
- */
-function CircledWord({ children, delay = 0.35 }: { children: ReactNode; delay?: number }) {
-  return (
-    <span className="relative inline-block px-0.5">
-      {children}
-      <svg viewBox="0 0 100 84" preserveAspectRatio="none" className="pointer-events-none absolute -inset-x-2 -inset-y-2 text-gold-500" aria-hidden="true">
-        <motion.path
-          d={SKETCH_PATHS.circle}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2.5}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          initial={{ pathLength: 0, opacity: 1 }}
-          animate={{ pathLength: [0, 1, 1], opacity: [1, 1, 0] }}
-          transition={{ duration: 2.6, delay, times: [0, 0.4, 1], ease: [0.65, 0, 0.35, 1] }}
-        />
-      </svg>
-    </span>
-  );
-}
 
 /**
  * Insere um CircledWord em cada frase de `keywords` encontrada dentro de
@@ -166,22 +139,21 @@ export function About() {
     <Section id="instituicao" background="white">
       <div className="grid items-center gap-16 lg:grid-cols-2">
         <Reveal direction="right">
-          <div className="relative">
-            {/* Brilho dourado sutil quando a aba História está ativa — a
-                galeria "responde" à leitura, em vez de ser um elemento
-                puramente decorativo ao lado do texto. */}
-            <InstitutionGallery
-              activeCategory={active}
-              className={cn(
-                'aspect-[4/5] w-full rounded-3xl transition-shadow duration-700 ease-[var(--ease-premium)]',
-                active === 'historia' && 'shadow-[0_0_0_3px_var(--tw-shadow-color)] shadow-gold-400/30',
-              )}
-            />
-            <div className="fold-corner absolute -bottom-8 -right-6 w-56 rounded-2xl border border-ink-100 bg-white p-5 shadow-[var(--shadow-lift)] sm:-right-10">
-              <p className="text-3xl font-bold text-brand-700">30+</p>
-              <p className="mt-1 text-sm text-ink-500">anos formando histórias de sucesso</p>
-            </div>
-          </div>
+          {/* O selo "30+ anos" que vivia solto aqui, flutuando sobre o
+              rodapé da foto, saiu — o mesmo dado já aparece integrado ao
+              Hero ("+30 anos de tradição") e à seção de confiança
+              (Stats, com CountUp), então repeti-lo aqui como cartão
+              deslocado era redundância visual, não reforço. */}
+          {/* Brilho dourado sutil quando a aba História está ativa — a
+              galeria "responde" à leitura, em vez de ser um elemento
+              puramente decorativo ao lado do texto. */}
+          <InstitutionGallery
+            activeCategory={active}
+            className={cn(
+              'aspect-[4/5] w-full rounded-3xl transition-shadow duration-700 ease-[var(--ease-premium)]',
+              active === 'historia' && 'shadow-[0_0_0_3px_var(--tw-shadow-color)] shadow-gold-400/30',
+            )}
+          />
         </Reveal>
 
         <Reveal direction="left">
