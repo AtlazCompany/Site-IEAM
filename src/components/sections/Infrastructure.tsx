@@ -6,18 +6,22 @@ import { useCoarsePointer } from '@/hooks/useCoarsePointer';
 const SPANS = ['lg:col-span-2 lg:row-span-2', '', '', 'lg:col-span-2', '', '', '', 'lg:col-span-2', '', ''];
 
 /**
- * Anotações manuscritas em 6 das 10 fotos — só reaproveitando palavras que
- * já existem nas legendas reais dessas fotos (ecoam slide.title/caption em
- * gallery.ts). Nunca um rótulo de instalação inventado (ex.: "Laboratório")
- * que a foto não mostre de verdade. As outras 4 ficam limpas — a fotografia
- * segue sendo a protagonista, não cada centímetro precisa de anotação.
+ * Anotação manuscrita nas 10 fotos — uma por foto, sempre reaproveitando
+ * uma palavra que já existe na legenda/título real dela em gallery.ts,
+ * nunca um rótulo de instalação inventado (ex.: "Laboratório") que a foto
+ * não mostre de verdade. Todas as fotos seguem o mesmo padrão agora — antes
+ * só 6 das 10 tinham essa anotação, o que lia como inconsistência.
  */
 const PHOTO_NOTES: Record<string, { note: string; withArrow?: boolean }> = {
   'historia-1': { note: 'Orgulho' },
   'historia-2': { note: 'Gerações' },
+  'missao-1': { note: 'Formação' },
   'missao-2': { note: 'Disciplina', withArrow: true },
+  'missao-3': { note: 'Aprendizado' },
   'visao-1': { note: 'Prontos' },
   'valores-1': { note: 'Convivência' },
+  'valores-2': { note: 'Espaços' },
+  'valores-3': { note: 'Educação' },
   'valores-4': { note: 'Aprender brincando' },
 };
 

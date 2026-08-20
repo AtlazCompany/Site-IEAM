@@ -30,7 +30,7 @@ export function SectionHeading({
       {eyebrow && (
         <span
           className={cn(
-            'mb-4 inline-block text-xs label-mono',
+            'mb-4 inline-block text-sm label-mono',
             light ? 'text-gold-300' : 'text-brand-600',
           )}
         >
@@ -39,14 +39,14 @@ export function SectionHeading({
       )}
       <h2
         className={cn(
-          'text-balance text-3xl font-bold leading-[1.15] sm:text-4xl lg:text-[2.75rem]',
+          'text-balance text-4xl font-bold leading-[1.15] sm:text-5xl lg:text-[3.25rem]',
           light ? 'text-white' : 'text-ink-900',
         )}
       >
         {title}
       </h2>
       {description && (
-        <p className={cn('mt-4 text-lg leading-relaxed', light ? 'text-white/70' : 'text-ink-500')}>
+        <p className={cn('mt-4 text-xl leading-relaxed', light ? 'text-white/70' : 'text-ink-500')}>
           {description}
         </p>
       )}

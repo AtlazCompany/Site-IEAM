@@ -58,7 +58,7 @@ export default function Contact() {
       />
 
       <Section background="white" className="pt-0 sm:pt-0 lg:pt-0">
-        <div className="flex flex-col items-center gap-4 rounded-3xl border border-brand-100 bg-brand-50 p-6 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 rounded-3xl border border-brand-100 bg-brand-50 p-6 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>
             <p className="font-display text-lg font-semibold text-ink-900">Prefere conhecer a estrutura pessoalmente?</p>
             <p className="mt-1 text-sm text-ink-500">Agende uma visita guiada e tire suas dúvidas presencialmente com a nossa equipe.</p>

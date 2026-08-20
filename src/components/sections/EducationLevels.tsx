@@ -9,7 +9,6 @@ import {
   StaggerItem,
   HandDrawnLine,
   AnimatedEquation,
-  HandwrittenNote,
 } from '@/components/ui';
 import { SKETCH_PATHS } from '@/components/ui/sketches/sketchPaths';
 import { EDUCATION_LEVELS } from '@/constants/content';
@@ -24,13 +23,17 @@ const BANDS = [
 ];
 
 /**
- * Elemento manuscrito por nível — só o suficiente pra cada card ter a sua
- * "descoberta", sem repetir o mesmo efeito nos três (Infantil já tem a
- * estrela no ícone, Médio a equação — aqui fica um rótulo curto revelado
- * no hover, ecoando "Projetos interdisciplinares"/"Metodologia ativa").
+ * Uma expressão matemática por nível de ensino — mesma faixa etária que o
+ * card já anuncia (contagem simples no Infantil, operações no Fundamental,
+ * álgebra no Médio). Vive no mesmo slot revelado por hover/toque ao lado da
+ * faixa etária, nunca como bloco solto entre a lista e os botões — era ali,
+ * "deslocada" e sozinha só no card do Médio, que a versão anterior quebrava
+ * a composição.
  */
 const HOVER_NOTES: Record<string, string> = {
-  fundamental: 'praticar',
+  infantil: '1, 2, 3',
+  fundamental: '8 × 4 = 32',
+  medio: 'x² + 5x + 6 = 0',
 };
 
 interface LevelCardProps {
@@ -87,9 +90,12 @@ function LevelCard({ level, index, onInterest }: LevelCardProps) {
         <div className="flex items-center gap-2">
           <p className="label-mono text-[10px] text-brand-600">{ageRange}</p>
           {hoverNote && (
-            <HandwrittenNote visible={noteVisible} rotate={-5} className="text-base text-gold-600/80">
-              {hoverNote}
-            </HandwrittenNote>
+            <AnimatedEquation
+              expression={hoverNote}
+              visible={noteVisible}
+              delay={0.05}
+              className="-rotate-2 text-xl text-gold-600/80"
+            />
           )}
         </div>
         <h3 className="mt-1.5 text-xl font-bold text-ink-900">{title}</h3>
@@ -103,13 +109,6 @@ function LevelCard({ level, index, onInterest }: LevelCardProps) {
             </li>
           ))}
         </ul>
-
-        {/* Único ponto do site com uma equação — ecoa "preparação para
-            vestibulares", que já está na descrição deste card, com
-            matemática de verdade em vez de um ícone. */}
-        {id === 'medio' && (
-          <AnimatedEquation expression="2x + 4 = 10 · x = 3" delay={0.2} className="mt-4 text-lg text-gold-600/80" />
-        )}
 
         <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
           <Button href={`/ensino#${id}`} variant="ghost" size="sm" className="self-start px-0" icon={<ArrowRight className="h-4 w-4" />}>

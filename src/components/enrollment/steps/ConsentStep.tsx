@@ -28,7 +28,7 @@ export function ConsentStep() {
         <p className="text-sm leading-relaxed text-ink-600">
           Usamos seus dados apenas para retornar este contato sobre matrícula e atendimento escolar. Nada é
           compartilhado com terceiros para fins comerciais. Saiba mais na{' '}
-          <Link to="/privacidade" target="_blank" className="font-semibold text-brand-600 underline underline-offset-2">
+          <Link to="/privacidade" target="_blank" rel="noopener" className="font-semibold text-brand-600 underline underline-offset-2">
             Política de Privacidade
           </Link>
           .

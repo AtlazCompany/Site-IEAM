@@ -54,9 +54,9 @@ export function Navbar() {
               to={link.href}
               className={({ isActive }) =>
                 cn(
-                  'relative rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-200',
-                  solid ? 'text-ink-600 hover:bg-brand-50 hover:text-brand-700' : 'text-white/85 hover:bg-white/10 hover:text-white',
-                  isActive && (solid ? 'text-brand-700' : 'text-white'),
+                  'group relative rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400',
+                  solid ? 'text-ink-600 hover:text-gold-700' : 'text-white/85 hover:text-gold-200',
+                  isActive && (solid ? 'text-gold-700' : 'text-gold-200'),
                 )
               }
               end={link.href === '/'}
@@ -66,11 +66,21 @@ export function Navbar() {
                   {isActive && (
                     <motion.span
                       layoutId="nav-active-pill"
-                      className={cn('absolute inset-0 -z-10 rounded-full', solid ? 'bg-brand-50' : 'bg-white/10')}
+                      className={cn('absolute inset-0 -z-10 rounded-full', solid ? 'bg-gold-50' : 'bg-white/10')}
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     />
                   )}
-                  <span className="relative">{link.label}</span>
+                  <span className="relative">
+                    {link.label}
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        'absolute inset-x-3 -bottom-0.5 h-px scale-x-0 rounded-full transition-transform duration-200 ease-[var(--ease-premium)] group-hover:scale-x-100',
+                        solid ? 'bg-gold-500' : 'bg-gold-300',
+                        isActive && 'scale-x-100',
+                      )}
+                    />
+                  </span>
                 </>
               )}
             </RouterNavLink>
@@ -119,8 +129,8 @@ export function Navbar() {
                   to={link.href}
                   className={({ isActive }) =>
                     cn(
-                      'rounded-xl px-4 py-3 text-base font-semibold text-ink-700 transition-colors',
-                      isActive ? 'bg-brand-50 text-brand-700' : 'hover:bg-ink-50',
+                      'rounded-xl px-4 py-3 text-base font-semibold text-ink-700 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400',
+                      isActive ? 'bg-gold-50 text-gold-700' : 'hover:bg-gold-50/60 hover:text-gold-700 active:bg-gold-50',
                     )
                   }
                   end={link.href === '/'}
