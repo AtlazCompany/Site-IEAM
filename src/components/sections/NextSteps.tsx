@@ -1,4 +1,5 @@
 import { GraduationCap, CalendarCheck, MessageCircle, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Section, SectionHeading, Card, Button, StaggerGroup, StaggerItem } from '@/components/ui';
 import { SITE } from '@/constants/site';
 import { useEnrollmentModal } from '@/hooks/useEnrollmentModal';
@@ -59,9 +60,13 @@ export function NextSteps() {
         {PATHS.map((path) => (
           <StaggerItem key={path.title}>
             <Card className="flex h-full flex-col items-start">
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+              <motion.span
+                whileHover={{ y: -3 }}
+                transition={{ type: 'spring', stiffness: 340, damping: 14 }}
+                className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600"
+              >
                 <path.icon className="h-6 w-6" strokeWidth={2} />
-              </span>
+              </motion.span>
               <h3 className="mt-5 text-lg font-bold text-ink-900">{path.title}</h3>
               <p className="mt-2 flex-1 text-[15px] leading-relaxed text-ink-500">{path.description}</p>
               {path.href ? (

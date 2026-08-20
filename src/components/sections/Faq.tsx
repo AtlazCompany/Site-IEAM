@@ -23,7 +23,15 @@ export function Faq() {
                   className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-semibold text-ink-900">{item.question}</span>
+                  <span className="flex items-center gap-2 font-semibold text-ink-900">
+                    {/* A dúvida em si já é uma pergunta — o "?" manuscrito
+                        vira "✓" quando ela é respondida (aberta), reforçando
+                        a própria função da seção, não decoração solta. */}
+                    <span className="font-hand text-lg text-gold-500" aria-hidden="true">
+                      {isOpen ? '✓' : '?'}
+                    </span>
+                    {item.question}
+                  </span>
                   <span
                     className={cn(
                       'flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600 transition-transform duration-300',

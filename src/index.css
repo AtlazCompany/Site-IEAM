@@ -4,12 +4,18 @@
 @import '@fontsource-variable/archivo/wght.css';
 @import '@fontsource/ibm-plex-mono/400.css';
 @import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource-variable/caveat/wght.css';
 
 @theme {
   /* ---------- Typography ---------- */
   --font-sans: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-display: 'Fraunces Variable', Georgia, serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* Manuscrita — reservada exclusivamente para a camada de anotações
+     "caderno vivo" (HandDrawnLine/ChalkUnderline/AnimatedEquation). Nunca
+     usar em título, corpo de texto ou botão — a tipografia institucional
+     da IEAM continua Fraunces + Archivo. */
+  --font-hand: 'Caveat Variable', cursive;
 
   /* ---------- Brand green (Pine → Moss → Sage) ---------- */
   --color-brand-50: #f5f8f4;

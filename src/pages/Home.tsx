@@ -30,13 +30,20 @@ export default function Home() {
         observers/estilos de várias seções inteiras tudo de uma vez no
         carregamento inicial, que era a maior long task da página.
 
+        Ordem narrativa (aprovada): Apresentação → Diferenciais (prévia
+        rápida) → Sobre o IEAM (História → Valores) → Níveis de Ensino →
+        Metodologia → Estrutura → Selo de 30+ anos (prova de confiança
+        depois da prova visual) → Localização → Notícias → FAQ → Comece
+        por aqui → CTA Final. Ver mapa completo aprovado na conversa —
+        cada seção carrega uma pergunta-guia própria (About.tsx,
+        EducationLevels.tsx etc. documentam a sua).
+
         Depoimentos fica fora da Home por enquanto — os depoimentos atuais
         em constants/content.ts são exemplos, não pessoas reais; a seção
         volta assim que tivermos depoimentos confirmados pela instituição.
       */}
       <Hero />
       <Differentials />
-      <Stats />
       <About />
       <EducationLevels />
       <DeferredSection minHeight={1100}>
@@ -44,6 +51,9 @@ export default function Home() {
       </DeferredSection>
       <DeferredSection minHeight={1400}>
         <Infrastructure />
+      </DeferredSection>
+      <DeferredSection minHeight={520}>
+        <Stats />
       </DeferredSection>
       <DeferredSection minHeight={750}>
         <Location />
