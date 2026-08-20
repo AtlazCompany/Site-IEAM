@@ -8,8 +8,12 @@ export const SITE = {
   phone: '(86) 3227-3835',
   whatsapp: '5586999006021',
   email: 'contato@ieamafrense.com.br',
-  address: 'Rua Francisca de Melo Lobo, 5540 — Bairro Saci, Teresina - PI',
-  mapsEmbedQuery: 'Rua%20Francisca%20de%20Melo%20Lobo%2C%205540%2C%20Teresina%2C%20PI',
+  address: 'R. Maria de Lurdes Paixão, 5540-5550 - Saci, Teresina - PI',
+  /** Inclui o nome do estabelecimento na busca — é o que faz o Google Maps
+   * resolver para a ficha oficial do IEAM (com a foto da fachada) em vez de
+   * um ponto genérico no meio da rua. */
+  mapsEmbedQuery:
+    'Instituto%20Educacional%20Afonso%20Mafrense%20-%20IEAM%2C%20R.%20Maria%20de%20Lurdes%20Paix%C3%A3o%2C%205540-5550%20-%20Saci%2C%20Teresina%20-%20PI',
   social: {
     instagram: 'https://instagram.com/ieamafrense',
     facebook: 'https://facebook.com/ieamafrense',
