@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { ArrowRight, PlayCircle, GraduationCap, School, Laptop, Building2 } from 'lucide-react';
-import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion';
-import { Button, Container, ShaderBackground } from '@/components/ui';
+import { motion, useMotionValue, useSpring, useTransform, useReducedMotion, useScroll } from 'framer-motion';
+import { Button, Container, ShaderBackground, ChalkUnderline, HandDrawnLine, AnimatedEquation } from '@/components/ui';
 import { useEnrollmentModal } from '@/hooks/useEnrollmentModal';
 import { SITE } from '@/constants/site';
 
@@ -42,12 +42,27 @@ const INDICATORS = [
 export function Hero() {
   const { openEnrollment } = useEnrollmentModal();
   const { ref: parallaxRef, springX, springY } = useHeroParallax();
+  const prefersReducedMotion = useReducedMotion();
   const blob1X = useTransform(springX, [-1, 1], [-18, 18]);
   const blob1Y = useTransform(springY, [-1, 1], [-18, 18]);
   const blob2X = useTransform(springX, [-1, 1], [14, -14]);
   const blob2Y = useTransform(springY, [-1, 1], [14, -14]);
   const panelX = useTransform(springX, [-1, 1], [-6, 6]);
   const panelY = useTransform(springY, [-1, 1], [-6, 6]);
+
+  // Scroll-progress do próprio Hero — único uso de scroll-progress do site.
+  // Some apenas dois elementos decorativos/supletivos (badge e o traço de
+  // giz), nunca o título, o parágrafo ou os CTAs: a mensagem principal
+  // nunca desaparece enquanto o usuário rola. `style`/`useTransform` não
+  // passa pelo `MotionConfig reducedMotion="user"` (isso só cobre
+  // transições `animate`) — por isso o intervalo de saída é zerado
+  // manualmente quando o usuário pede movimento reduzido, mesmo padrão já
+  // usado no parallax de cursor acima.
+  const { scrollYProgress } = useScroll({ target: parallaxRef, offset: ['start start', 'end start'] });
+  const badgeOpacity = useTransform(scrollYProgress, [0, 0.4], prefersReducedMotion ? [1, 1] : [1, 0]);
+  const badgeY = useTransform(scrollYProgress, [0, 0.4], prefersReducedMotion ? [0, 0] : [0, -14]);
+  const flourishOpacity = useTransform(scrollYProgress, [0, 0.35], prefersReducedMotion ? [1, 1] : [1, 0]);
+  const flourishY = useTransform(scrollYProgress, [0, 0.35], prefersReducedMotion ? [0, 0] : [0, 10]);
 
   return (
     <section
@@ -79,16 +94,18 @@ export function Hero() {
       />
 
       <Container className="relative">
-        <div className="grid items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs label-mono text-gold-300 ring-1 ring-inset ring-white/15"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-gold-400" />
-              Matrículas abertas para {SITE.enrollmentYear}
+        <div className="flex flex-col gap-16 lg:grid lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+          <div className="min-w-0">
+            <motion.div style={{ opacity: badgeOpacity, y: badgeY }}>
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs label-mono text-gold-300 ring-1 ring-inset ring-white/15"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-gold-400" />
+                Matrículas abertas para {SITE.enrollmentYear}
+              </motion.div>
             </motion.div>
 
             <motion.h1
@@ -98,9 +115,11 @@ export function Hero() {
               className="text-balance text-4xl font-bold leading-[1.08] text-white sm:text-5xl lg:text-6xl"
             >
               Transformando conhecimento em{' '}
-              <span className="bg-gradient-to-r from-gold-300 to-gold-400 bg-clip-text text-transparent">
-                futuro.
-              </span>
+              <ChalkUnderline lineClassName="text-gold-300">
+                <span className="bg-gradient-to-r from-gold-300 to-gold-400 bg-clip-text text-transparent">
+                  futuro.
+                </span>
+              </ChalkUnderline>
             </motion.h1>
 
             <motion.p
@@ -131,6 +150,28 @@ export function Hero() {
               <Button href="/instituicao" variant="outline" size="lg" icon={<PlayCircle className="h-5 w-5" />}>
                 Conheça o IEAM
               </Button>
+            </motion.div>
+
+            {/*
+              Pequeno traço de giz + sequência de palavras — a jornada do
+              Hero em miniatura. Puramente decorativo (aria-hidden): a
+              headline e o parágrafo acima já carregam a mensagem real.
+            */}
+            <motion.div style={{ opacity: flourishOpacity, y: flourishY }}>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="mt-8 flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3"
+                aria-hidden="true"
+              >
+                <HandDrawnLine orientation="horizontal" delay={0.7} strokeWidth={3} className="h-2 w-10 shrink-0 text-gold-300/60" />
+                <AnimatedEquation
+                  expression="Curiosidade · Aprendizado · Descoberta · Futuro"
+                  delay={0.9}
+                  className="min-w-0 text-base text-gold-100/70 sm:text-lg"
+                />
+              </motion.div>
             </motion.div>
           </div>
 

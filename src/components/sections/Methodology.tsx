@@ -1,4 +1,6 @@
-import { Section, SectionHeading, Reveal } from '@/components/ui';
+import { motion } from 'framer-motion';
+import { Section, SectionHeading, Reveal, HandDrawnLine, AnimatedEquation } from '@/components/ui';
+import { SKETCH_PATHS } from '@/components/ui/sketches/sketchPaths';
 import { METHODOLOGY_STEPS } from '@/constants/content';
 
 export function Methodology() {
@@ -11,7 +13,16 @@ export function Methodology() {
       />
 
       <div className="relative mt-16">
-        <div className="absolute left-6 top-0 hidden h-full w-px bg-ink-200 lg:left-1/2 lg:block" />
+        {/* Antes era uma linha estática (bg-ink-200) — agora um traço
+            desenhado à mão que cresce enquanto o usuário rola pelos 5
+            passos, reforçando "conhecimento em movimento". */}
+        <HandDrawnLine
+          orientation="vertical"
+          duration={1.6}
+          strokeWidth={2.5}
+          amount={0.15}
+          className="absolute left-6 top-0 hidden text-ink-200 lg:left-1/2 lg:block"
+        />
 
         <div className="space-y-10 lg:space-y-0">
           {METHODOLOGY_STEPS.map(({ step, title, description, icon: Icon }, i) => (
@@ -28,18 +39,63 @@ export function Methodology() {
                     i % 2 === 0 ? 'lg:flex-row-reverse' : ''
                   }`}
                 >
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                  <motion.span
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: 'spring', stiffness: 320, damping: 16 }}
+                    className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600"
+                  >
                     <Icon className="h-6 w-6" strokeWidth={2} />
-                  </span>
+                    {/* Único ponto do site com uma pista de "código" —
+                        acompanha o passo de tecnologia, bem sutil. */}
+                    {i === 2 && (
+                      <AnimatedEquation
+                        expression="{ }"
+                        delay={0.15}
+                        className="absolute -right-1.5 -top-1.5 text-sm leading-none text-gold-500"
+                      />
+                    )}
+                  </motion.span>
                   <div>
                     <span className="text-xs label-mono text-gold-600">Passo {step}</span>
                     <h3 className="mt-1 text-lg font-bold text-ink-900">{title}</h3>
                     <p className="mt-2 text-[15px] leading-relaxed text-ink-500">{description}</p>
+                    {/* Errar faz parte do método — a mesma conta corrigida do
+                        easter egg da 404, aqui no lugar que fala de
+                        avaliação: "avaliação contínua" é justamente isso. */}
+                    {i === 4 && (
+                      <div
+                        className={`mt-3 flex items-center gap-2 ${i % 2 === 0 ? 'lg:justify-end' : ''}`}
+                        aria-hidden="true"
+                      >
+                        <span className="relative inline-block px-1">
+                          <AnimatedEquation expression="1 + 1 = 3" delay={0.2} className="text-base text-ink-300" />
+                          <svg viewBox="0 0 40 40" preserveAspectRatio="none" className="pointer-events-none absolute -inset-1.5 text-red-400/70">
+                            <motion.path
+                              d={SKETCH_PATHS.cross}
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth={3}
+                              strokeLinecap="round"
+                              initial={{ pathLength: 0, opacity: 0 }}
+                              whileInView={{ pathLength: 1, opacity: 1 }}
+                              viewport={{ once: true, amount: 0.6 }}
+                              transition={{ duration: 0.35, delay: 0.9, ease: [0.65, 0, 0.35, 1] }}
+                            />
+                          </svg>
+                        </span>
+                        <span className="text-sm text-ink-300">→</span>
+                        <AnimatedEquation expression="1 + 1 = 2" delay={1.1} className="text-base text-brand-600/80" />
+                      </div>
+                    )}
                   </div>
                 </div>
               </Reveal>
 
-              <div
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20, delay: 0.15 }}
                 className={`absolute left-6 top-1/2 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white bg-gold-400 shadow-[var(--shadow-gold)] lg:left-1/2 lg:block ${
                   i % 2 === 0 ? 'lg:order-2' : 'lg:order-1'
                 }`}

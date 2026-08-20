@@ -35,9 +35,16 @@ export function Navbar() {
         solid ? 'glass border-b border-ink-100 shadow-[var(--shadow-soft)]' : 'bg-transparent',
       )}
     >
-      <div className="container-page flex h-20 items-center justify-between">
+      <div
+        className={cn(
+          'container-page flex items-center justify-between transition-[height] duration-300 ease-[var(--ease-premium)]',
+          solid ? 'h-16' : 'h-20',
+        )}
+      >
         <Link to="/" aria-label="IEAM — Página inicial" className="shrink-0">
-          <Logo dark={solid} />
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }} transition={{ type: 'spring', stiffness: 400, damping: 20 }}>
+            <Logo dark={solid} />
+          </motion.div>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Navegação principal">
@@ -47,14 +54,25 @@ export function Navbar() {
               to={link.href}
               className={({ isActive }) =>
                 cn(
-                  'rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-200',
+                  'relative rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-200',
                   solid ? 'text-ink-600 hover:bg-brand-50 hover:text-brand-700' : 'text-white/85 hover:bg-white/10 hover:text-white',
-                  isActive && (solid ? 'text-brand-700 bg-brand-50' : 'text-white bg-white/10'),
+                  isActive && (solid ? 'text-brand-700' : 'text-white'),
                 )
               }
               end={link.href === '/'}
             >
-              {link.label}
+              {({ isActive }) => (
+                <>
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active-pill"
+                      className={cn('absolute inset-0 -z-10 rounded-full', solid ? 'bg-brand-50' : 'bg-white/10')}
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                  <span className="relative">{link.label}</span>
+                </>
+              )}
             </RouterNavLink>
           ))}
         </nav>
