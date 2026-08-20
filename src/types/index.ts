@@ -48,6 +48,11 @@ export interface NewsItem {
   excerpt: string;
   date: string;
   category: string;
+  /** Ausente = card cai no placeholder de gradiente + Badge. */
+  image?: string;
+  /** Formato preferencial, mais leve — usado via <picture><source type="image/webp">. */
+  imageWebp?: string;
+  imageAlt?: string;
 }
 
 export interface FaqItem {

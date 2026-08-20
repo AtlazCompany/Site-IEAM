@@ -1,19 +1,36 @@
+import { lazy } from 'react';
 import { Seo } from '@/components/layout/Seo';
 import { DeferredSection } from '@/components/ui';
-import {
-  Hero,
-  Differentials,
-  Stats,
-  About,
-  EducationLevels,
-  Methodology,
-  Infrastructure,
-  Location,
-  News,
-  Faq,
-  NextSteps,
-  CtaFinal,
-} from '@/components/sections';
+// Import direto do arquivo, não do barrel `@/components/sections` — o
+// barrel reexporta as 14 seções num só módulo, e isso é o que fazia o
+// Rollup fundir tudo num único chunk mesmo com `lazy()` abaixo: bastava
+// UM import estático do barrel (para pegar Hero/Differentials/etc.) para
+// arrastar Methodology/Infrastructure/Stats/... junto, porque o bundler
+// trata o barrel inteiro como uma unidade só. Importando cada seção do seu
+// próprio arquivo, só as 4 realmente usadas de imediato entram no chunk
+// eager da Home.
+import { Hero } from '@/components/sections/Hero';
+import { Differentials } from '@/components/sections/Differentials';
+import { About } from '@/components/sections/About';
+import { EducationLevels } from '@/components/sections/EducationLevels';
+
+/**
+ * Das seções abaixo em diante, `DeferredSection` só adiava a *montagem* — o
+ * JS delas continuava saindo tudo junto no bundle principal, baixado e
+ * interpretado de imediato mesmo para conteúdo lá embaixo. Isso também vira
+ * código dividido de verdade, mesmo padrão já usado pelo MorphSlider em
+ * InstitutionGallery.tsx.
+ */
+const Methodology = lazy(() => import('@/components/sections/Methodology').then((m) => ({ default: m.Methodology })));
+const Infrastructure = lazy(() =>
+  import('@/components/sections/Infrastructure').then((m) => ({ default: m.Infrastructure })),
+);
+const Stats = lazy(() => import('@/components/sections/Stats').then((m) => ({ default: m.Stats })));
+const Location = lazy(() => import('@/components/sections/Location').then((m) => ({ default: m.Location })));
+const News = lazy(() => import('@/components/sections/News').then((m) => ({ default: m.News })));
+const Faq = lazy(() => import('@/components/sections/Faq').then((m) => ({ default: m.Faq })));
+const NextSteps = lazy(() => import('@/components/sections/NextSteps').then((m) => ({ default: m.NextSteps })));
+const CtaFinal = lazy(() => import('@/components/sections/CtaFinal').then((m) => ({ default: m.CtaFinal })));
 
 export default function Home() {
   return (

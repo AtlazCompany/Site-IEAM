@@ -24,8 +24,28 @@ export default function NewsPage() {
           {NEWS_ITEMS.map((item) => (
             <StaggerItem key={item.id}>
               <Card className="flex h-full flex-col overflow-hidden p-0" hoverLift>
-                <div className="flex aspect-[16/10] items-center justify-center bg-gradient-to-br from-brand-600 to-brand-900">
-                  <Badge variant="light">{item.category}</Badge>
+                <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-brand-600 to-brand-900">
+                  {item.image ? (
+                    <picture>
+                      {item.imageWebp && <source srcSet={item.imageWebp} type="image/webp" />}
+                      <img
+                        src={item.image}
+                        alt={item.imageAlt ?? ''}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover"
+                      />
+                    </picture>
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center">
+                      <Badge variant="light">{item.category}</Badge>
+                    </div>
+                  )}
+                  {item.image && (
+                    <Badge variant="light" className="absolute left-4 top-4">
+                      {item.category}
+                    </Badge>
+                  )}
                 </div>
                 <div className="flex flex-1 flex-col p-6">
                   <div className="flex items-center gap-1.5 text-xs font-medium text-ink-400">

@@ -25,6 +25,13 @@ import type {
   FaqItem,
 } from '@/types';
 
+import newsMatriculasImg from '@/assets/news/foto noticia Matrículas abertas para o próximo ano letivo.png';
+import newsMatriculasWebp from '@/assets/news/foto noticia Matrículas abertas para o próximo ano letivo.webp';
+import newsTecnologiaImg from '@/assets/news/foto noticia Tecnologia e inovação no dia a dia das aulas.png';
+import newsTecnologiaWebp from '@/assets/news/foto noticia Tecnologia e inovação no dia a dia das aulas.webp';
+import newsNovidadesImg from '@/assets/news/foto noticia Acompanhe as novidades do IEAM.png';
+import newsNovidadesWebp from '@/assets/news/foto noticia Acompanhe as novidades do IEAM.webp';
+
 export const DIFFERENTIALS: Differential[] = [
   {
     icon: Users,
@@ -38,8 +45,8 @@ export const DIFFERENTIALS: Differential[] = [
   },
   {
     icon: Target,
-    title: 'Preparação para vestibulares',
-    description: 'Programa intensivo de resolução, simulados e acompanhamento individualizado.',
+    title: 'Preparação para o seu futuro',
+    description: 'Programa intensivo de resolução, simulados e acompanhamento individualizado para chegar preparado a cada etapa decisiva.',
   },
   {
     icon: FlaskConical,
@@ -49,7 +56,7 @@ export const DIFFERENTIALS: Differential[] = [
   {
     icon: Wifi,
     title: 'Tecnologia em sala',
-    description: 'Lousas digitais, plataformas próprias e conectividade em todo o campus.',
+    description: 'Lousas atualizadas, plataformas próprias e conectividade em todo o campus.',
   },
   {
     icon: Dumbbell,
@@ -192,6 +199,9 @@ export const NEWS_ITEMS: NewsItem[] = [
       'Famílias já podem iniciar o processo de matrícula em todos os níveis de ensino oferecidos pelo IEAM.',
     date: 'Em breve',
     category: 'Matrículas',
+    image: newsMatriculasImg,
+    imageWebp: newsMatriculasWebp,
+    imageAlt: 'Divulgação das matrículas abertas do IEAM para 2026',
   },
   {
     id: 'n2',
@@ -200,6 +210,9 @@ export const NEWS_ITEMS: NewsItem[] = [
       'Conheça como o IEAM integra ferramentas digitais à rotina pedagógica, do Infantil ao Ensino Médio.',
     date: 'Em breve',
     category: 'Ensino',
+    image: newsTecnologiaImg,
+    imageWebp: newsTecnologiaWebp,
+    imageAlt: 'Divulgação da Feira Tecnológica do IEAM',
   },
   {
     id: 'n3',
@@ -208,6 +221,9 @@ export const NEWS_ITEMS: NewsItem[] = [
       'Este espaço será atualizado com notícias, eventos e conquistas reais da comunidade escolar.',
     date: 'Em breve',
     category: 'Institucional',
+    image: newsNovidadesImg,
+    imageWebp: newsNovidadesWebp,
+    imageAlt: 'Divulgação institucional do IEAM sobre educação que transforma o futuro',
   },
 ];
 
@@ -233,8 +249,8 @@ export const FAQ_ITEMS: FaqItem[] = [
       'Utilizamos plataforma digital própria com boletins, frequência e comunicados em tempo real, além de reuniões periódicas com a coordenação.',
   },
   {
-    question: 'O IEAM possui transporte escolar?',
+    question: 'Onde ficam os meios de contato?',
     answer:
-      'Trabalhamos em parceria com empresas de transporte escolar credenciadas que atendem os principais bairros da cidade.',
+      'Todos os nossos canais — telefone, e-mail, endereço e redes sociais — estão reunidos no rodapé do site. Se preferir algo mais rápido, é só mandar uma mensagem pelo botão flutuante do WhatsApp, disponível em qualquer página.',
   },
 ];

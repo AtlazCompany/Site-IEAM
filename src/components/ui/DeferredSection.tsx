@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 
 interface DeferredSectionProps {
@@ -57,7 +57,15 @@ export function DeferredSection({ children, minHeight, className }: DeferredSect
     return () => observer.disconnect();
   }, [mounted]);
 
-  if (mounted) return <>{children}</>;
+  const placeholder = <div ref={ref} aria-hidden="true" className={className} style={{ minHeight }} />;
 
-  return <div ref={ref} aria-hidden="true" className={className} style={{ minHeight }} />;
+  if (mounted) {
+    // `children` pode ser um componente `lazy()` (é o caso das seções
+    // abaixo da dobra, ver Home.tsx) — o Suspense cobre o intervalo entre
+    // "entrou na viewport" e "chunk JS baixado", mantendo a mesma altura
+    // reservada em vez de dar um salto de layout.
+    return <Suspense fallback={placeholder}>{children}</Suspense>;
+  }
+
+  return placeholder;
 }
