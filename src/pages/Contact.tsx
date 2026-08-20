@@ -57,7 +57,7 @@ export default function Contact() {
         breadcrumb="Contato"
       />
 
-      <Section background="white" className="pt-0 pb-0 sm:pt-0 sm:pb-0 lg:pt-0 lg:pb-0">
+      <Section background="white" className="pt-10 pb-0 sm:pt-12 sm:pb-0 lg:pt-14 lg:pb-0">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 rounded-3xl border border-brand-100 bg-brand-50 p-6 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>
             <p className="font-display text-lg font-semibold text-ink-900">Prefere conhecer a estrutura pessoalmente?</p>
