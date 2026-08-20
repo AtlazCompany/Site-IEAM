@@ -1,5 +1,5 @@
-import type { VercelRequest, VercelResponse } from './_lib/types';
-import { sendNotificationEmail, renderFieldsTable } from './_lib/resend';
+import type { VercelRequest, VercelResponse } from './_lib/types.js';
+import { sendNotificationEmail, renderFieldsTable } from './_lib/resend.js';
 
 /** Espelha o formato produzido por buildSubmissionPayload() em src/services/enrollmentService.ts. */
 interface EnrollmentBody {

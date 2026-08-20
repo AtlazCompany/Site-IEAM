@@ -1,5 +1,5 @@
-import type { VercelRequest, VercelResponse } from './_lib/types';
-import { sendNotificationEmail, renderFieldsTable, escapeHtml } from './_lib/resend';
+import type { VercelRequest, VercelResponse } from './_lib/types.js';
+import { sendNotificationEmail, renderFieldsTable, escapeHtml } from './_lib/resend.js';
 
 interface ScheduleVisitBody {
   name?: string;
