@@ -64,7 +64,8 @@ export async function submitEnrollment(values: EnrollmentSchema): Promise<Enroll
     });
 
     if (!response.ok) {
-      throw new Error(`O servidor respondeu com status ${response.status}.`);
+      const data = (await response.json().catch(() => null)) as { message?: string } | null;
+      throw new Error(data?.message ?? `O servidor respondeu com status ${response.status}.`);
     }
 
     return {

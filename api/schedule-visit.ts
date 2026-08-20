@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from './_lib/types.js';
 import { sendNotificationEmail, renderFieldsTable, escapeHtml } from './_lib/resend.js';
+import { getClientIp, isRateLimited } from './_lib/rateLimit.js';
 
 interface ScheduleVisitBody {
   name?: string;
@@ -13,6 +14,11 @@ interface ScheduleVisitBody {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     res.status(405).json({ success: false, message: 'Método não permitido.' });
+    return;
+  }
+
+  if (isRateLimited(getClientIp(req.headers))) {
+    res.status(429).json({ success: false, message: 'Muitas tentativas. Aguarde alguns minutos e tente novamente.' });
     return;
   }
 
