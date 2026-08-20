@@ -1,16 +1,30 @@
-import type { ScheduleVisitSchema } from '@/schemas/scheduleVisitSchema';
+import { VISIT_TIME_OPTIONS, type ScheduleVisitSchema } from '@/schemas/scheduleVisitSchema';
 
 export interface ScheduleVisitResult {
   success: boolean;
   message: string;
 }
 
+function formatPreferredDate(value: string): string {
+  const date = new Date(`${value}T00:00:00`);
+  return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('pt-BR');
+}
+
+function timeLabel(value: string): string {
+  return VISIT_TIME_OPTIONS.find((option) => option.value === value)?.label ?? value;
+}
+
 export async function submitScheduleVisit(values: ScheduleVisitSchema): Promise<ScheduleVisitResult> {
   try {
+    const payload = {
+      ...values,
+      preferredDate: values.preferredDate ? formatPreferredDate(values.preferredDate) : values.preferredDate,
+      preferredTime: values.preferredTime ? timeLabel(values.preferredTime) : values.preferredTime,
+    };
     const response = await fetch('/api/schedule-visit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(values),
+      body: JSON.stringify(payload),
     });
     const data = (await response.json().catch(() => null)) as { success?: boolean; message?: string } | null;
 
