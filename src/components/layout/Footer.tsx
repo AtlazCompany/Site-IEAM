@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, MessageCircle, ArrowRight } from 'lucide-react';
 import { Logo } from './Logo';
-import { Container, Button, InstagramIcon, FacebookIcon, YoutubeIcon, StaggerGroup, StaggerItem } from '@/components/ui';
+import { Container, Button, InstagramIcon, FacebookIcon, YoutubeIcon, StaggerGroup, StaggerItem, Reveal } from '@/components/ui';
 import { SKETCH_PATHS } from '@/components/ui/sketches/sketchPaths';
 import { SITE, NAV_LINKS } from '@/constants/site';
 import { useEnrollmentModal } from '@/hooks/useEnrollmentModal';
@@ -168,6 +168,16 @@ export function Footer() {
             <Link to="/privacidade" className="hover:text-white/80">Política de Privacidade</Link>
             <Link to="/contato" className="hover:text-white/80">Fale Conosco</Link>
           </div>
+        </Container>
+      </div>
+
+      <div className="border-t border-white/5">
+        <Container className="flex justify-center py-4">
+          <Reveal>
+            <p className="text-[11px] tracking-wide text-white/35">
+              Criado por <span className="credit-shine font-semibold">Atlaz Company</span>
+            </p>
+          </Reveal>
         </Container>
       </div>
     </footer>
