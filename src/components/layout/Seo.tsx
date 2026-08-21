@@ -29,6 +29,7 @@ export function Seo({ title, description, path = '', noindex = false }: SeoProps
     setMeta('property', 'og:title', fullTitle);
     setMeta('property', 'og:description', description);
     setMeta('property', 'og:type', 'website');
+    setMeta('property', 'og:locale', 'pt_BR');
     setMeta('property', 'og:url', `https://www.ieamafrense.com.br${path}`);
     setMeta('property', 'og:site_name', SITE.name);
     setMeta('property', 'og:image', ogImage);
