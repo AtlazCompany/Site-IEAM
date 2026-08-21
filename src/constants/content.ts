@@ -51,7 +51,7 @@ export const DIFFERENTIALS: Differential[] = [
   {
     icon: FlaskConical,
     title: 'Laboratórios completos',
-    description: 'Espaços equipados para ciências, robótica e experimentação prática.',
+    description: 'Espaços equipados para ciências, informática e experimentação prática.',
   },
   {
     icon: Wifi,
@@ -66,12 +66,12 @@ export const DIFFERENTIALS: Differential[] = [
   {
     icon: BookOpen,
     title: 'Biblioteca',
-    description: 'Acervo físico e digital que incentiva a leitura e a pesquisa autônoma.',
+    description: 'Acervo físico bem estruturado que incentiva a leitura e a pesquisa autônoma.',
   },
   {
     icon: Sparkles,
     title: 'Atividades extracurriculares',
-    description: 'Arte, música, robótica e clubes de interesse para um desenvolvimento integral.',
+    description: 'Arte, música e clubes de interesse para um desenvolvimento integral.',
   },
 ];
 
@@ -241,7 +241,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'O instituto oferece bolsas ou descontos?',
     answer:
-      'Sim. Trabalhamos com condições especiais para matrículas antecipadas, irmãos matriculados e programas de bolsa por mérito acadêmico.',
+      'Sim. Trabalhamos com condições especiais para matrículas antecipadas, para famílias com parentes matriculados que chegaram até nós por indicação, e com um programa dedicado a filhos de ex-alunos.',
   },
   {
     question: 'Como é o acompanhamento pedagógico das famílias?',

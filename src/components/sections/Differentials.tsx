@@ -62,18 +62,18 @@ function DifferentialsWideDoodles() {
 }
 
 /**
- * Traço manuscrito pontual em 5 dos 8 cards — cada um ecoando o próprio
- * título real do diferencial (nunca um dado novo). Os outros 3 ficam sem
- * doodle de propósito: nem todo card pede uma "descoberta" escrita, e
- * forçar um símbolo em todos viraria decoração, não comunicação (regra dos
- * 80% clareza / 20% surpresa).
+ * Traço manuscrito pontual nos 8 cards — cada um ecoando o próprio título
+ * real do diferencial (nunca um dado novo).
  */
 const DOODLES: Record<string, { expression?: string; note?: string }> = {
   'Professores qualificados': { note: '✓' },
+  'Ensino moderno': { note: 'inovar' },
   'Preparação para o seu futuro': { expression: 'Σ' },
   'Laboratórios completos': { note: 'descobrir' },
   'Tecnologia em sala': { expression: '</>' },
+  'Esportes': { note: 'vencer' },
   'Biblioteca': { note: 'ler' },
+  'Atividades extracurriculares': { note: 'criar' },
 };
 
 interface DifferentialCardProps {
