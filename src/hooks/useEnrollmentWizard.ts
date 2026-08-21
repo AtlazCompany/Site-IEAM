@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { enrollmentSchema, type EnrollmentSchema } from '@/schemas/enrollmentSchema';
@@ -41,12 +41,21 @@ export function useEnrollmentWizard({ initialLevel, origin, active }: UseEnrollm
   });
 
   const { watch, trigger, getValues, reset } = form;
+  const [isDirty, setIsDirty] = useState(() => hasMeaningfulDraftData(getValues() as EnrollmentFormValues));
 
-  // Persist draft on every field change while the wizard is open.
+  // Persist draft on every field change while the wizard is open, and track
+  // "isDirty" from the same subscription instead of calling watch() during
+  // render — watch() with no args re-renders this hook's consumer (the
+  // whole wizard: progress bar, current step, nav buttons) on every single
+  // keystroke, which was the main source of jank while typing. setIsDirty
+  // with an unchanged boolean is a no-op re-render-wise, so this only
+  // re-renders when the dirty state actually flips.
   useEffect(() => {
     if (!active) return;
     const subscription = watch((values) => {
-      saveEnrollmentDraft(values as EnrollmentFormValues, stepIndex);
+      const typed = values as EnrollmentFormValues;
+      saveEnrollmentDraft(typed, stepIndex);
+      setIsDirty(hasMeaningfulDraftData(typed));
     });
     return () => subscription.unsubscribe();
   }, [watch, stepIndex, active]);
@@ -132,9 +141,6 @@ export function useEnrollmentWizard({ initialLevel, origin, active }: UseEnrollm
     setSubmitOutcome(null);
     setWhatsappConfirmed(false);
   }, [reset, initialLevel]);
-
-  const watchedValues = watch();
-  const isDirty = useMemo(() => hasMeaningfulDraftData(watchedValues), [watchedValues]);
 
   return {
     form,

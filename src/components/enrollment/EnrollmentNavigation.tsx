@@ -19,7 +19,7 @@ export function EnrollmentNavigation({
   onNext,
 }: EnrollmentNavigationProps) {
   return (
-    <div className="flex shrink-0 items-center justify-between gap-3 border-t border-ink-100 bg-white px-5 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:px-8">
+    <div className="flex shrink-0 items-center justify-between gap-2 border-t border-ink-100 bg-white px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:gap-3 sm:px-8">
       <Button
         type="button"
         variant="ghost"
@@ -47,7 +47,16 @@ export function EnrollmentNavigation({
           )
         }
       >
-        {submitting ? 'Enviando...' : isLastStep ? 'Enviar interesse de matrícula' : 'Continuar'}
+        {submitting ? (
+          'Enviando...'
+        ) : isLastStep ? (
+          <>
+            <span className="sm:hidden">Enviar matrícula</span>
+            <span className="hidden sm:inline">Enviar interesse de matrícula</span>
+          </>
+        ) : (
+          'Continuar'
+        )}
       </Button>
     </div>
   );
