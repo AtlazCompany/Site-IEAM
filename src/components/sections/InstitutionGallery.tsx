@@ -46,6 +46,7 @@ export function InstitutionGallery({ activeCategory, className }: InstitutionGal
   const [focused, setFocused] = useState(false);
   const [tabHidden, setTabHidden] = useState(() => document.hidden);
   const [inView, setInView] = useState(false);
+  const [nearViewport, setNearViewport] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const rootRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<MorphSliderHandle>(null);
@@ -82,6 +83,31 @@ export function InstitutionGallery({ activeCategory, className }: InstitutionGal
     return () => observer.disconnect();
   }, []);
 
+  // Sinal separado de "nearViewport": o WebGL do MorphSlider (ogl + GSAP)
+  // estava sendo montado assim que a Home carregava, mesmo com a galeria
+  // ~1900px abaixo da dobra — um segundo contexto WebGL ativo ao lado do
+  // ShaderBackground do Hero sem necessidade nenhuma. rootMargin generoso
+  // pré-carrega antes do usuário chegar perto, evitando pop-in; dispara uma
+  // vez só (não precisa "desmontar" de novo ao rolar pra longe).
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setNearViewport(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNearViewport(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '600px 0px' },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   if (slides.length === 0) return null;
 
   const slide = slides[index] ?? slides[0];
@@ -102,6 +128,9 @@ export function InstitutionGallery({ activeCategory, className }: InstitutionGal
           <span className="sr-only" aria-live="polite">
             {slide.alt}
           </span>
+          {!nearViewport ? (
+            <GalleryFallback slide={slide} />
+          ) : (
           <Suspense fallback={<GalleryFallback slide={slide} />}>
             <MorphSlider
               ref={sliderRef}
@@ -179,6 +208,7 @@ export function InstitutionGallery({ activeCategory, className }: InstitutionGal
               )}
             </MorphSlider>
           </Suspense>
+          )}
         </div>
       </div>
     </div>

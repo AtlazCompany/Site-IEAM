@@ -9,7 +9,7 @@ import { useCoarsePointer } from '@/hooks/useCoarsePointer';
  * categoria continua disponível no carrossel "Sobre o Instituto"
  * (InstitutionGallery), que consome gallery.ts sem filtro.
  */
-const FEATURED_IDS = ['historia-1', 'historia-3', 'valores-5', 'valores-6', 'valores-7', 'missao-1', 'valores-3'];
+const FEATURED_IDS = ['historia-1', 'historia-3', 'valores-5', 'valores-6', 'valores-7', 'missao-1', 'valores-3', 'missao-2'];
 
 const SPANS: Record<string, string> = {
   'historia-1': 'lg:col-span-2 lg:row-span-2', // menina apontando para a farda — abre o mosaico

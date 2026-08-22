@@ -14,7 +14,16 @@ export function MainLayout() {
   return (
     <EnrollmentModalProvider>
       <ScheduleVisitModalProvider>
-        <div className="flex min-h-screen flex-col overflow-x-hidden bg-white">
+        {/* Sem overflow-x aqui de propósito: o corte horizontal vive em
+            `html` (index.css) — qualquer combinação de overflow-x:hidden
+            com overflow-y não-hidden nesta div (mesmo "visible" explícito)
+            faz o CSS forçar overflow-y para "auto" (spec), transformando
+            esta própria div num contêiner de rolagem independente quando o
+            conteúdo passa a altura da viewport por poucos pixels — a
+            "segunda rolagem" no lado direito. Cortar no <html> evita o
+            problema porque ali o overflow-y "auto" resultante É a rolagem
+            principal da página, não uma segunda. */}
+        <div className="flex min-h-screen flex-col bg-white">
           <Navbar />
           <motion.main
             key={pathname}
