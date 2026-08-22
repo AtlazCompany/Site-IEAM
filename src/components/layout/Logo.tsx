@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn';
-import logoSealWebp from '@/assets/icons/logo-seal-144.webp';
-import logoSealPng from '@/assets/icons/logo-seal-144.png';
+import logoIeamWebp from '@/assets/icons/logo-ieam-144.webp';
+import logoIeamPng from '@/assets/icons/logo-ieam-144.png';
 
 interface LogoProps {
   dark?: boolean;
@@ -32,10 +32,10 @@ export function Logo({ dark = false, className }: LogoProps) {
         )}
       >
         <picture>
-          <source srcSet={logoSealWebp} type="image/webp" />
+          <source srcSet={logoIeamWebp} type="image/webp" />
           <img
-            src={logoSealPng}
-            alt="Selo do IEAM"
+            src={logoIeamPng}
+            alt="Logo do IEAM — Instituto Educacional Afonso Mafrense"
             width={144}
             height={144}
             decoding="async"
