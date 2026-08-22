@@ -3,14 +3,27 @@ import { Section, SectionHeading, StaggerGroup, StaggerItem, HandwrittenNote, Ha
 import { GALLERY_SLIDES, GALLERY_CATEGORY_META, type GallerySlide } from '@/constants/gallery';
 import { useCoarsePointer } from '@/hooks/useCoarsePointer';
 
-const SPANS = ['lg:col-span-2 lg:row-span-2', '', '', 'lg:col-span-2', '', '', '', 'lg:col-span-2', '', ''];
+/**
+ * Curadoria deliberada — nem toda foto de gallery.ts entra aqui. Este
+ * mosaico é a "vitrine" de estrutura da Home; a lista completa por
+ * categoria continua disponível no carrossel "Sobre o Instituto"
+ * (InstitutionGallery), que consome gallery.ts sem filtro.
+ */
+const FEATURED_IDS = ['historia-1', 'historia-3', 'valores-5', 'valores-6', 'valores-7', 'missao-1', 'valores-3'];
+
+const SPANS: Record<string, string> = {
+  'historia-1': 'lg:col-span-2 lg:row-span-2', // menina apontando para a farda — abre o mosaico
+  'historia-3': 'lg:col-span-2', // fachada do instituto
+  'valores-5': 'lg:col-span-2 lg:row-span-2', // ping-pong — maior destaque, espaço de convivência
+  'valores-6': 'lg:col-span-2', // amarelinha — mesma área
+};
 
 /**
- * Anotação manuscrita nas 10 fotos — uma por foto, sempre reaproveitando
- * uma palavra que já existe na legenda/título real dela em gallery.ts,
- * nunca um rótulo de instalação inventado (ex.: "Laboratório") que a foto
- * não mostre de verdade. Todas as fotos seguem o mesmo padrão agora — antes
- * só 6 das 10 tinham essa anotação, o que lia como inconsistência.
+ * Anotação manuscrita por foto, sempre reaproveitando uma palavra que já
+ * existe na legenda/título real dela em gallery.ts, nunca um rótulo de
+ * instalação inventado (ex.: "Laboratório") que a foto não mostre de
+ * verdade. Mantém entradas de fotos fora de FEATURED_IDS também — útil se
+ * a curadoria do mosaico mudar no futuro.
  */
 const PHOTO_NOTES: Record<string, { note: string; withArrow?: boolean }> = {
   'historia-1': { note: 'Orgulho' },
@@ -23,6 +36,15 @@ const PHOTO_NOTES: Record<string, { note: string; withArrow?: boolean }> = {
   'valores-2': { note: 'Espaços' },
   'valores-3': { note: 'Educação' },
   'valores-4': { note: 'Aprender brincando' },
+  'historia-3': { note: 'Chegamos' },
+  'historia-4': { note: 'Amizade' },
+  'historia-5': { note: 'Pausa' },
+  'missao-4': { note: 'Estudar' },
+  'missao-5': { note: 'Focar' },
+  'visao-2': { note: 'Conquistar' },
+  'valores-5': { note: 'Conviver' },
+  'valores-6': { note: 'Brincar' },
+  'valores-7': { note: 'Recreio' },
 };
 
 function PhotoCell({ slide, span }: { slide: GallerySlide; span: string }) {
@@ -97,9 +119,11 @@ export function Infrastructure() {
       />
 
       <StaggerGroup className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:auto-rows-[11rem]">
-        {GALLERY_SLIDES.map((slide, i) => (
-          <PhotoCell key={slide.id} slide={slide} span={SPANS[i] ?? ''} />
-        ))}
+        {FEATURED_IDS.map((id) => {
+          const slide = GALLERY_SLIDES.find((s) => s.id === id);
+          if (!slide) return null;
+          return <PhotoCell key={slide.id} slide={slide} span={SPANS[slide.id] ?? ''} />;
+        })}
       </StaggerGroup>
     </Section>
   );

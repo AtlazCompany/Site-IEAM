@@ -25,6 +25,28 @@ import valores3Webp from '@/assets/gallery/img_7663.webp';
 import valores4Jpg from '@/assets/gallery/img_7669.jpg';
 import valores4Webp from '@/assets/gallery/img_7669.webp';
 
+import fachadaJpg from '@/assets/gallery/instituto-fachada.jpg';
+import fachadaWebp from '@/assets/gallery/instituto-fachada.webp';
+import alunasMint1Jpg from '@/assets/gallery/alunas-mint-1.jpg';
+import alunasMint1Webp from '@/assets/gallery/alunas-mint-1.webp';
+import alunasMint2Jpg from '@/assets/gallery/alunas-mint-2.jpg';
+import alunasMint2Webp from '@/assets/gallery/alunas-mint-2.webp';
+
+import bibliotecaTurmaJpg from '@/assets/gallery/convivencia-biblioteca-turma.jpg';
+import bibliotecaTurmaWebp from '@/assets/gallery/convivencia-biblioteca-turma.webp';
+import bibliotecaAlunaJpg from '@/assets/gallery/convivencia-biblioteca-aluna.jpg';
+import bibliotecaAlunaWebp from '@/assets/gallery/convivencia-biblioteca-aluna.webp';
+
+import alunoMedalhaJpg from '@/assets/gallery/aluno-medalha.jpg';
+import alunoMedalhaWebp from '@/assets/gallery/aluno-medalha.webp';
+
+import pingPongJpg from '@/assets/gallery/convivencia-ping-pong.jpg';
+import pingPongWebp from '@/assets/gallery/convivencia-ping-pong.webp';
+import amarelinhaJpg from '@/assets/gallery/convivencia-amarelinha-piscina.jpg';
+import amarelinhaWebp from '@/assets/gallery/convivencia-amarelinha-piscina.webp';
+import parquinhoJpg from '@/assets/gallery/infra-parquinho.jpg';
+import parquinhoWebp from '@/assets/gallery/infra-parquinho.webp';
+
 export type GalleryCategory = 'historia' | 'missao' | 'visao' | 'valores';
 
 export interface GallerySlide {
@@ -154,5 +176,105 @@ export const GALLERY_SLIDES: GallerySlide[] = [
     image: valores4Jpg,
     imageWebp: valores4Webp,
     gradient: 'from-brand-700 via-brand-800 to-brand-950',
+  },
+  {
+    id: 'historia-3',
+    category: 'historia',
+    title: 'Nossa fachada, seu novo endereço',
+    caption: 'A entrada do IEAM, no coração de Teresina — o começo de cada dia letivo.',
+    alt: 'Fachada do Instituto Educacional Afonso Mafrense, com letreiro verde e telefones de contato, vista da calçada.',
+    image: fachadaJpg,
+    imageWebp: fachadaWebp,
+    gradient: 'from-brand-800 via-brand-900 to-brand-950',
+  },
+  {
+    id: 'historia-4',
+    category: 'historia',
+    title: 'Amizades que ficam',
+    caption: 'Colegas de turma, unidas pelo mesmo uniforme e pela mesma trajetória.',
+    alt: 'Duas alunas sorridentes, de camiseta verde-água do IEAM, posando lado a lado em frente a um mural pintado.',
+    image: alunasMint1Jpg,
+    imageWebp: alunasMint1Webp,
+    gradient: 'from-brand-700 via-brand-900 to-brand-950',
+  },
+  {
+    id: 'historia-5',
+    category: 'historia',
+    title: 'Momentos entre aulas',
+    caption: 'Pausas que também fazem parte da experiência escolar no IEAM.',
+    alt: 'Duas alunas sorridentes sentadas em poltronas coloridas, com uma piscina ao fundo.',
+    image: alunasMint2Jpg,
+    imageWebp: alunasMint2Webp,
+    gradient: 'from-brand-600 via-brand-800 to-brand-950',
+  },
+  {
+    id: 'missao-4',
+    category: 'missao',
+    title: 'Estudo em grupo',
+    caption: 'Alunos do Ensino Médio dividem dúvidas e aprendizado na biblioteca do instituto.',
+    alt: 'Grupo de seis alunos do Ensino Médio estudando juntos ao redor de uma mesa na biblioteca, cercados de estantes de livros.',
+    image: bibliotecaTurmaJpg,
+    imageWebp: bibliotecaTurmaWebp,
+    gradient: 'from-brand-800 via-brand-700 to-brand-950',
+  },
+  {
+    id: 'missao-5',
+    category: 'missao',
+    title: 'Concentração que rende',
+    caption: 'Cada aluno no seu ritmo, com todo o acervo da biblioteca à disposição.',
+    alt: 'Aluna de óculos concentrada lendo um caderno de atividades na biblioteca do IEAM.',
+    image: bibliotecaAlunaJpg,
+    imageWebp: bibliotecaAlunaWebp,
+    gradient: 'from-brand-600 via-brand-800 to-brand-950',
+  },
+  {
+    id: 'visao-2',
+    category: 'visao',
+    title: 'Conquistas que orgulham',
+    caption: 'Resultados que mostram do que a dedicação dos nossos alunos é capaz.',
+    alt: 'Aluno sorridente exibindo uma medalha de ouro, em frente a uma parede de azulejos verdes e brancos.',
+    image: alunoMedalhaJpg,
+    imageWebp: alunoMedalhaWebp,
+    gradient: 'from-brand-900 via-brand-800 to-brand-950',
+  },
+  {
+    id: 'visao-3',
+    category: 'visao',
+    title: 'Prontas para o que vier',
+    caption: 'Confiança que se constrói, ano após ano, dentro do IEAM.',
+    alt: 'Duas alunas sorridentes, de camiseta verde-água do IEAM, posando lado a lado em frente a um mural pintado.',
+    image: alunasMint1Jpg,
+    imageWebp: alunasMint1Webp,
+    gradient: 'from-brand-700 via-brand-900 to-brand-950',
+  },
+  {
+    id: 'valores-5',
+    category: 'valores',
+    title: 'Espaço de convivência',
+    caption: 'Ping-pong, conversa e descontração — o intervalo também educa.',
+    alt: 'Alunos jogando ping-pong e conversando em mesas ao ar livre, na área de convivência do IEAM.',
+    image: pingPongJpg,
+    imageWebp: pingPongWebp,
+    gradient: 'from-brand-700 via-brand-800 to-brand-900',
+  },
+  {
+    id: 'valores-6',
+    category: 'valores',
+    title: 'Brincar também é aprender',
+    caption: 'Amarelinha no chão, piscina ao fundo — espaço pensado para o lazer dos alunos.',
+    alt: 'Área de convivência com jogo de amarelinha pintado no chão, cadeiras coloridas e piscina ao fundo.',
+    image: amarelinhaJpg,
+    imageWebp: amarelinhaWebp,
+    gradient: 'from-brand-600 via-brand-900 to-brand-950',
+  },
+  {
+    id: 'valores-7',
+    category: 'valores',
+    title: 'Diversão para os pequenos',
+    caption: 'Escorregadores, piscina de bolinhas e cama elástica para a Educação Infantil aproveitar o recreio.',
+    alt: 'Parquinho colorido com escorregadores, piscina de bolinhas e cama elástica, em área coberta da Educação Infantil.',
+    image: parquinhoJpg,
+    imageWebp: parquinhoWebp,
+    gradient: 'from-brand-800 via-brand-900 to-brand-950',
   },
 ];
