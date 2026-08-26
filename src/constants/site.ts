@@ -6,8 +6,8 @@ export const SITE = {
   /** Ano letivo das matrículas em destaque no site. Atualizar anualmente. */
   enrollmentYear: 2026,
   phone: '(86) 3227-3835',
-  whatsapp: '5586999006021',
-  email: 'contato@ieamafrense.com.br',
+  whatsapp: '5586994863802',
+  email: 'amafrense@gmail.com',
   address: 'R. Maria de Lurdes Paixão, 5540-5550 - Saci, Teresina - PI',
   /** Inclui o nome do estabelecimento na busca — é o que faz o Google Maps
    * resolver para a ficha oficial do IEAM (com a foto da fachada) em vez de
