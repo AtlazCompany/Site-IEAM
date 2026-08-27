@@ -1,7 +1,8 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import type { MorphSliderHandle, MorphSliderItem } from '@/components/ui/MorphSlider';
+import { PhotoLightbox } from '@/components/ui';
 import { GALLERY_SLIDES, GALLERY_CATEGORY_META, type GalleryCategory, type GallerySlide } from '@/constants/gallery';
 import { cn } from '@/utils/cn';
 
@@ -47,6 +48,7 @@ export function InstitutionGallery({ activeCategory, className }: InstitutionGal
   const [tabHidden, setTabHidden] = useState(() => document.hidden);
   const [inView, setInView] = useState(false);
   const [nearViewport, setNearViewport] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const rootRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<MorphSliderHandle>(null);
@@ -128,6 +130,16 @@ export function InstitutionGallery({ activeCategory, className }: InstitutionGal
           <span className="sr-only" aria-live="polite">
             {slide.alt}
           </span>
+
+          <button
+            type="button"
+            onClick={() => setLightboxOpen(true)}
+            aria-label="Ver foto em tela cheia"
+            className="pointer-events-auto absolute right-3 top-4 z-[3] flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:bg-white/25 focus-visible:opacity-100 group-hover/gallery:opacity-100 group-focus-within/gallery:opacity-100"
+          >
+            <Maximize2 className="h-4 w-4" />
+          </button>
+
           {!nearViewport ? (
             <GalleryFallback slide={slide} />
           ) : (
@@ -211,6 +223,15 @@ export function InstitutionGallery({ activeCategory, className }: InstitutionGal
           )}
         </div>
       </div>
+
+      {lightboxOpen && (
+        <PhotoLightbox
+          images={slides.map((s) => ({ src: s.image ?? s.imageWebp ?? '', alt: s.alt, title: s.title, caption: s.caption }))}
+          index={index}
+          onIndexChange={(i) => sliderRef.current?.goTo(i)}
+          onExited={() => setLightboxOpen(false)}
+        />
+      )}
     </div>
   );
 }

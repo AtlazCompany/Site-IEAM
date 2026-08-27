@@ -19,16 +19,16 @@ function DifferentialsDoodles() {
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 hidden overflow-hidden lg:block 2xl:hidden">
       {/* Coluna esquerda — alterna entre "perto" e "longe" da borda em vez
           de empilhar tudo na mesma linha vertical, pra parecer espalhado. */}
-      <ChalkDoodle name="sun" rotate={-8} strokeWidth={3} className="absolute left-1 top-0 h-16 w-16 text-gold-400/70" delay={0.1} />
-      <ChalkDoodle name="star" rotate={16} strokeWidth={3} className="absolute left-[80px] top-[36px] h-12 w-12 text-brand-400/70" delay={0.5} />
-      <ChalkDoodle name="paperPlane" rotate={-16} strokeWidth={3} className="absolute left-2 top-[96px] h-14 w-14 text-sky-400/70" delay={0.25} />
-      <ChalkDoodle name="apple" rotate={10} strokeWidth={3} className="absolute left-[78px] top-[116px] h-12 w-12 text-red-400/70" delay={0.4} />
+      <ChalkDoodle name="sun" rotate={-8} strokeWidth={3} duration={2.2} className="absolute left-1 top-0 h-16 w-16 text-gold-400/70" delay={0.2} />
+      <ChalkDoodle name="star" rotate={16} strokeWidth={3} duration={2.2} className="absolute left-[80px] top-[36px] h-12 w-12 text-brand-400/70" delay={0.9} />
+      <ChalkDoodle name="paperPlane" rotate={-16} strokeWidth={3} duration={2.2} className="absolute left-2 top-[96px] h-14 w-14 text-sky-400/70" delay={0.45} />
+      <ChalkDoodle name="apple" rotate={10} strokeWidth={3} duration={2.2} className="absolute left-[78px] top-[116px] h-12 w-12 text-red-400/70" delay={0.7} />
 
       {/* Coluna direita — mesmo zigue-zague, espelhado */}
-      <ChalkDoodle name="cloud" rotate={6} strokeWidth={3} className="absolute right-1 top-[8px] h-16 w-16 text-sky-400/70" delay={0.15} />
-      <ChalkDoodle name="heart" rotate={-12} strokeWidth={3} className="absolute right-[82px] top-[44px] h-12 w-12 text-rose-400/70" delay={0.3} />
-      <ChalkDoodle name="pencil" rotate={14} strokeWidth={3} className="absolute right-2 top-[100px] h-14 w-14 text-brand-500/70" delay={0.45} />
-      <ChalkDoodle name="globe" rotate={-8} strokeWidth={3} className="absolute right-[80px] top-[120px] h-12 w-12 text-gold-500/70" delay={0.2} />
+      <ChalkDoodle name="cloud" rotate={6} strokeWidth={3} duration={2.2} className="absolute right-1 top-[8px] h-16 w-16 text-sky-400/70" delay={0.3} />
+      <ChalkDoodle name="heart" rotate={-12} strokeWidth={3} duration={2.2} className="absolute right-[82px] top-[44px] h-12 w-12 text-rose-400/70" delay={0.55} />
+      <ChalkDoodle name="pencil" rotate={14} strokeWidth={3} duration={2.2} className="absolute right-2 top-[100px] h-14 w-14 text-brand-500/70" delay={0.8} />
+      <ChalkDoodle name="globe" rotate={-8} strokeWidth={3} duration={2.2} className="absolute right-[80px] top-[120px] h-12 w-12 text-gold-500/70" delay={0.35} />
     </div>
   );
 }
@@ -47,16 +47,16 @@ function DifferentialsWideDoodles() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden 2xl:block">
       {/* Coluna esquerda — 4 formas espaçadas ao longo de toda a seção */}
-      <ChalkDoodle name="sun" rotate={-10} strokeWidth={3} className="absolute left-2 top-[10px] h-24 w-24 text-gold-400/70" delay={0.1} />
-      <ChalkDoodle name="star" rotate={18} strokeWidth={3} className="absolute left-[58px] top-[240px] h-14 w-14 text-brand-400/70" delay={0.5} />
-      <ChalkDoodle name="paperPlane" rotate={-16} strokeWidth={3} className="absolute left-3 top-[480px] h-20 w-20 text-sky-400/70" delay={0.25} />
-      <ChalkDoodle name="apple" rotate={12} strokeWidth={3} className="absolute left-[50px] top-[720px] h-16 w-16 text-red-400/70" delay={0.4} />
+      <ChalkDoodle name="sun" rotate={-10} strokeWidth={3} duration={2.2} className="absolute left-2 top-[10px] h-24 w-24 text-gold-400/70" delay={0.2} />
+      <ChalkDoodle name="star" rotate={18} strokeWidth={3} duration={2.2} className="absolute left-[58px] top-[240px] h-14 w-14 text-brand-400/70" delay={0.9} />
+      <ChalkDoodle name="paperPlane" rotate={-16} strokeWidth={3} duration={2.2} className="absolute left-3 top-[480px] h-20 w-20 text-sky-400/70" delay={0.45} />
+      <ChalkDoodle name="apple" rotate={12} strokeWidth={3} duration={2.2} className="absolute left-[50px] top-[720px] h-16 w-16 text-red-400/70" delay={0.7} />
 
       {/* Coluna direita — mesmo espalhamento, espelhado */}
-      <ChalkDoodle name="cloud" rotate={8} strokeWidth={3} className="absolute right-2 top-[30px] h-24 w-24 text-sky-400/70" delay={0.15} />
-      <ChalkDoodle name="heart" rotate={-16} strokeWidth={3} className="absolute right-[58px] top-[260px] h-14 w-14 text-rose-400/70" delay={0.3} />
-      <ChalkDoodle name="pencil" rotate={18} strokeWidth={3} className="absolute right-3 top-[500px] h-20 w-20 text-brand-500/70" delay={0.45} />
-      <ChalkDoodle name="globe" rotate={-10} strokeWidth={3} className="absolute right-[50px] top-[740px] h-16 w-16 text-gold-500/70" delay={0.2} />
+      <ChalkDoodle name="cloud" rotate={8} strokeWidth={3} duration={2.2} className="absolute right-2 top-[30px] h-24 w-24 text-sky-400/70" delay={0.3} />
+      <ChalkDoodle name="heart" rotate={-16} strokeWidth={3} duration={2.2} className="absolute right-[58px] top-[260px] h-14 w-14 text-rose-400/70" delay={0.55} />
+      <ChalkDoodle name="pencil" rotate={18} strokeWidth={3} duration={2.2} className="absolute right-3 top-[500px] h-20 w-20 text-brand-500/70" delay={0.8} />
+      <ChalkDoodle name="globe" rotate={-10} strokeWidth={3} duration={2.2} className="absolute right-[50px] top-[740px] h-16 w-16 text-gold-500/70" delay={0.35} />
     </div>
   );
 }

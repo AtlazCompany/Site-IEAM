@@ -56,13 +56,16 @@ export function Location() {
               uma vez — reforça a ideia de "descobrir" as informações. */}
           <StaggerGroup className="flex h-full flex-col justify-between" staggerDelay={0.12}>
             <StaggerItem>
-              <motion.span
-                whileHover={{ scale: 1.08, rotate: 4 }}
-                transition={{ type: 'spring', stiffness: 320, damping: 16 }}
-                className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-brand-600 shadow-[var(--shadow-soft)]"
-              >
-                <MapPin className="h-6 w-6" />
-              </motion.span>
+              <div className="flex items-center gap-3">
+                <motion.span
+                  whileHover={{ scale: 1.08, rotate: 4 }}
+                  transition={{ type: 'spring', stiffness: 320, damping: 16 }}
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-brand-600 shadow-[var(--shadow-soft)]"
+                >
+                  <MapPin className="h-6 w-6" />
+                </motion.span>
+                <span className="text-sm font-medium italic text-ink-500">&ldquo;{SITE.referenceStreet}&rdquo;</span>
+              </div>
               <p className="mt-5 text-lg font-semibold leading-snug text-ink-900">{SITE.address}</p>
             </StaggerItem>
 

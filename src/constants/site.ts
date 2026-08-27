@@ -4,11 +4,15 @@ export const SITE = {
   tagline: 'Transformando conhecimento em futuro.',
   tenure: 'mais de 30 anos',
   /** Ano letivo das matrículas em destaque no site. Atualizar anualmente. */
-  enrollmentYear: 2026,
+  enrollmentYear: 2027,
   phone: '(86) 3227-3835',
   whatsapp: '5586994863802',
   email: 'amafrense@gmail.com',
   address: 'R. Maria de Lurdes Paixão, 5540-5550 - Saci, Teresina - PI',
+  /** Nome popular da rua, usado de geração em geração como referência — não é o
+   * endereço oficial, mas é como a escola é conhecida na região. Exibido junto
+   * ao ícone de localização, antes do endereço oficial. */
+  referenceStreet: 'R. Francisca de Melo Lobo, 5540',
   /** Inclui o nome do estabelecimento na busca — é o que faz o Google Maps
    * resolver para a ficha oficial do IEAM (com a foto da fachada) em vez de
    * um ponto genérico no meio da rua. */

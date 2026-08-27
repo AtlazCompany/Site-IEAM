@@ -201,7 +201,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     category: 'Matrículas',
     image: newsMatriculasImg,
     imageWebp: newsMatriculasWebp,
-    imageAlt: 'Divulgação das matrículas abertas do IEAM para 2026',
+    imageAlt: 'Divulgação das matrículas abertas do IEAM para 2027',
   },
   {
     id: 'n2',
@@ -246,7 +246,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'Como é o acompanhamento pedagógico das famílias?',
     answer:
-      'Utilizamos plataforma digital própria com boletins, frequência e comunicados em tempo real, além de reuniões periódicas com a coordenação.',
+      'O responsável comparece presencialmente ao instituto para assinar os boletins mensais do aluno e, ao final do ano letivo, recebe o boletim anual completo com todo o histórico de desempenho.',
   },
   {
     question: 'Onde ficam os meios de contato?',

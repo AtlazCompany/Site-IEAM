@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Section, SectionHeading, StaggerGroup, StaggerItem, HandwrittenNote, HandDrawnArrow } from '@/components/ui';
+import { Section, SectionHeading, StaggerGroup, StaggerItem, HandwrittenNote, HandDrawnArrow, PhotoLightbox } from '@/components/ui';
 import { GALLERY_SLIDES, GALLERY_CATEGORY_META, type GallerySlide } from '@/constants/gallery';
 import { useCoarsePointer } from '@/hooks/useCoarsePointer';
 
@@ -8,8 +8,26 @@ import { useCoarsePointer } from '@/hooks/useCoarsePointer';
  * mosaico é a "vitrine" de estrutura da Home; a lista completa por
  * categoria continua disponível no carrossel "Sobre o Instituto"
  * (InstitutionGallery), que consome gallery.ts sem filtro.
+ *
+ * Os últimos 5 ids são exclusivamente acessibilidade (elevador) e
+ * laboratórios — destaque pedido explicitamente para reforçar esses dois
+ * pontos da estrutura, além da curadoria original acima.
  */
-const FEATURED_IDS = ['historia-1', 'historia-3', 'valores-5', 'valores-6', 'valores-7', 'missao-1', 'valores-3', 'missao-2'];
+const FEATURED_IDS = [
+  'historia-1',
+  'historia-3',
+  'valores-5',
+  'valores-6',
+  'valores-7',
+  'missao-1',
+  'valores-3',
+  'missao-2',
+  'valores-8',
+  'missao-6',
+  'missao-7',
+  'missao-8',
+  'missao-9',
+];
 
 const SPANS: Record<string, string> = {
   'historia-1': 'lg:col-span-2 lg:row-span-2', // menina apontando para a farda — abre o mosaico
@@ -45,9 +63,14 @@ const PHOTO_NOTES: Record<string, { note: string; withArrow?: boolean }> = {
   'valores-5': { note: 'Conviver' },
   'valores-6': { note: 'Brincar' },
   'valores-7': { note: 'Recreio' },
+  'valores-8': { note: 'Acesso' },
+  'missao-6': { note: 'Investigar' },
+  'missao-7': { note: 'Observar' },
+  'missao-8': { note: 'Praticar' },
+  'missao-9': { note: 'Descobrir' },
 };
 
-function PhotoCell({ slide, span }: { slide: GallerySlide; span: string }) {
+function PhotoCell({ slide, span, onOpen }: { slide: GallerySlide; span: string; onOpen: () => void }) {
   const photoNote = PHOTO_NOTES[slide.id];
   const [hovered, setHovered] = useState(false);
   const isCoarsePointer = useCoarsePointer();
@@ -55,8 +78,11 @@ function PhotoCell({ slide, span }: { slide: GallerySlide; span: string }) {
 
   return (
     <StaggerItem className={span}>
-      <div
-        className="group relative h-full min-h-[9rem] overflow-hidden rounded-2xl ring-1 ring-inset ring-white/10 transition-all duration-300 hover:ring-gold-400/40 sm:min-h-[10rem]"
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-label={`Ver foto em tela cheia: ${slide.title}`}
+        className="group relative h-full min-h-[9rem] w-full overflow-hidden rounded-2xl text-left ring-1 ring-inset ring-white/10 transition-all duration-300 hover:ring-gold-400/40 sm:min-h-[10rem]"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -96,7 +122,7 @@ function PhotoCell({ slide, span }: { slide: GallerySlide; span: string }) {
             )}
           </div>
         )}
-      </div>
+      </button>
     </StaggerItem>
   );
 }
@@ -109,6 +135,9 @@ function PhotoCell({ slide, span }: { slide: GallerySlide; span: string }) {
  * além do que a própria foto mostra.
  */
 export function Infrastructure() {
+  const featuredSlides = FEATURED_IDS.map((id) => GALLERY_SLIDES.find((s) => s.id === id)).filter((s): s is GallerySlide => Boolean(s));
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   return (
     <Section background="brand">
       <SectionHeading
@@ -119,12 +148,19 @@ export function Infrastructure() {
       />
 
       <StaggerGroup className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:auto-rows-[11rem]">
-        {FEATURED_IDS.map((id) => {
-          const slide = GALLERY_SLIDES.find((s) => s.id === id);
-          if (!slide) return null;
-          return <PhotoCell key={slide.id} slide={slide} span={SPANS[slide.id] ?? ''} />;
-        })}
+        {featuredSlides.map((slide, i) => (
+          <PhotoCell key={slide.id} slide={slide} span={SPANS[slide.id] ?? ''} onOpen={() => setLightboxIndex(i)} />
+        ))}
       </StaggerGroup>
+
+      {lightboxIndex !== null && (
+        <PhotoLightbox
+          images={featuredSlides.map((s) => ({ src: s.image ?? s.imageWebp ?? '', alt: s.alt, title: s.title, caption: s.caption }))}
+          index={lightboxIndex}
+          onIndexChange={setLightboxIndex}
+          onExited={() => setLightboxIndex(null)}
+        />
+      )}
     </Section>
   );
 }

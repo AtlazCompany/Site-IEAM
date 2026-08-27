@@ -11,6 +11,8 @@ export { PageLoader } from './PageLoader';
 export { InstagramIcon, FacebookIcon, YoutubeIcon } from './SocialIcons';
 export { ShaderBackground } from './ShaderBackground';
 export { DeferredSection } from './DeferredSection';
+export { PhotoLightbox } from './PhotoLightbox';
+export type { LightboxImage } from './PhotoLightbox';
 export { MorphSlider } from './MorphSlider';
 export type { MorphSliderItem, MorphSliderHandle, MorphTransition } from './MorphSlider';
 export { StrokeText } from './StrokeText';

@@ -47,6 +47,27 @@ import amarelinhaWebp from '@/assets/gallery/convivencia-amarelinha-piscina.webp
 import parquinhoJpg from '@/assets/gallery/infra-parquinho.jpg';
 import parquinhoWebp from '@/assets/gallery/infra-parquinho.webp';
 
+import labMicroscopio1Jpg from '@/assets/gallery/lab-microscopio-1.jpg';
+import labMicroscopio1Webp from '@/assets/gallery/lab-microscopio-1.webp';
+import labMicroscopio2Jpg from '@/assets/gallery/lab-microscopio-2.jpg';
+import labMicroscopio2Webp from '@/assets/gallery/lab-microscopio-2.webp';
+import labQuimicaExperimentoJpg from '@/assets/gallery/lab-quimica-experimento.jpg';
+import labQuimicaExperimentoWebp from '@/assets/gallery/lab-quimica-experimento.webp';
+import labQuimicaAlunaJpg from '@/assets/gallery/lab-quimica-aluna.jpg';
+import labQuimicaAlunaWebp from '@/assets/gallery/lab-quimica-aluna.webp';
+import elevadorAcessibilidadeJpg from '@/assets/gallery/infra-elevador-acessibilidade.jpg';
+import elevadorAcessibilidadeWebp from '@/assets/gallery/infra-elevador-acessibilidade.webp';
+import cantinaJpg from '@/assets/gallery/convivencia-cantina.jpg';
+import cantinaWebp from '@/assets/gallery/convivencia-cantina.webp';
+import bibliotecaAlunoLeituraJpg from '@/assets/gallery/biblioteca-aluno-leitura.jpg';
+import bibliotecaAlunoLeituraWebp from '@/assets/gallery/biblioteca-aluno-leitura.webp';
+import bibliotecaAlunaLeitura1Jpg from '@/assets/gallery/biblioteca-aluna-leitura-1.jpg';
+import bibliotecaAlunaLeitura1Webp from '@/assets/gallery/biblioteca-aluna-leitura-1.webp';
+import bibliotecaAlunaLeitura2Jpg from '@/assets/gallery/biblioteca-aluna-leitura-2.jpg';
+import bibliotecaAlunaLeitura2Webp from '@/assets/gallery/biblioteca-aluna-leitura-2.webp';
+import bibliotecaAlunoSentadoJpg from '@/assets/gallery/biblioteca-aluno-sentado.jpg';
+import bibliotecaAlunoSentadoWebp from '@/assets/gallery/biblioteca-aluno-sentado.webp';
+
 export type GalleryCategory = 'historia' | 'missao' | 'visao' | 'valores';
 
 export interface GallerySlide {
@@ -276,5 +297,105 @@ export const GALLERY_SLIDES: GallerySlide[] = [
     image: parquinhoJpg,
     imageWebp: parquinhoWebp,
     gradient: 'from-brand-800 via-brand-900 to-brand-950',
+  },
+  {
+    id: 'missao-6',
+    category: 'missao',
+    title: 'Ciência de perto',
+    caption: 'Aulas de laboratório aproximam os alunos do Ensino Médio da prática científica.',
+    alt: 'Dois alunos do Ensino Médio observando uma lâmina em um microscópio no laboratório do IEAM.',
+    image: labMicroscopio1Jpg,
+    imageWebp: labMicroscopio1Webp,
+    gradient: 'from-brand-700 via-brand-800 to-brand-950',
+  },
+  {
+    id: 'missao-7',
+    category: 'missao',
+    title: 'Foco na experimentação',
+    caption: 'Cada aluno tem a chance de manusear os próprios equipamentos de laboratório.',
+    alt: 'Aluno concentrado observando através de um microscópio no laboratório do IEAM.',
+    image: labMicroscopio2Jpg,
+    imageWebp: labMicroscopio2Webp,
+    gradient: 'from-brand-800 via-brand-700 to-brand-950',
+  },
+  {
+    id: 'missao-8',
+    category: 'missao',
+    title: 'Química na prática',
+    caption: 'Experimentos guiados transformam a teoria da sala de aula em aprendizado concreto.',
+    alt: 'Duas alunas realizando um experimento de química, transferindo líquido entre frascos no laboratório do IEAM.',
+    image: labQuimicaExperimentoJpg,
+    imageWebp: labQuimicaExperimentoWebp,
+    gradient: 'from-brand-600 via-brand-800 to-brand-950',
+  },
+  {
+    id: 'missao-9',
+    category: 'missao',
+    title: 'Orgulho de experimentar',
+    caption: 'O laboratório de química é espaço de descoberta desde os primeiros experimentos.',
+    alt: 'Aluna sorridente segurando dois frascos de laboratório, um deles com substância azul, no laboratório de química do IEAM.',
+    image: labQuimicaAlunaJpg,
+    imageWebp: labQuimicaAlunaWebp,
+    gradient: 'from-brand-900 via-brand-800 to-brand-950',
+  },
+  {
+    id: 'missao-10',
+    category: 'missao',
+    title: 'Leitura que forma',
+    caption: 'Momentos individuais de leitura fazem parte da rotina na biblioteca do IEAM.',
+    alt: 'Aluno lendo um livro apoiado em uma estante na biblioteca do IEAM.',
+    image: bibliotecaAlunoLeituraJpg,
+    imageWebp: bibliotecaAlunoLeituraWebp,
+    gradient: 'from-brand-700 via-brand-900 to-brand-950',
+  },
+  {
+    id: 'missao-11',
+    category: 'missao',
+    title: 'Descobrindo nas páginas',
+    caption: 'O acervo da biblioteca convida os alunos a explorar novos assuntos.',
+    alt: 'Aluna sorridente lendo um livro apoiada em uma estante na biblioteca do IEAM.',
+    image: bibliotecaAlunaLeitura1Jpg,
+    imageWebp: bibliotecaAlunaLeitura1Webp,
+    gradient: 'from-brand-800 via-brand-900 to-brand-950',
+  },
+  {
+    id: 'missao-12',
+    category: 'missao',
+    title: 'Gosto pela leitura',
+    caption: 'Incentivar a leitura desde cedo é parte da formação pedagógica do IEAM.',
+    alt: 'Aluna sorridente lendo um livro apoiada em uma estante na biblioteca do IEAM.',
+    image: bibliotecaAlunaLeitura2Jpg,
+    imageWebp: bibliotecaAlunaLeitura2Webp,
+    gradient: 'from-brand-600 via-brand-900 to-brand-950',
+  },
+  {
+    id: 'missao-13',
+    category: 'missao',
+    title: 'Tempo de estudo',
+    caption: 'Um espaço tranquilo para revisar conteúdos e se aprofundar nas disciplinas.',
+    alt: 'Aluno sentado lendo um livro na biblioteca do IEAM.',
+    image: bibliotecaAlunoSentadoJpg,
+    imageWebp: bibliotecaAlunoSentadoWebp,
+    gradient: 'from-brand-700 via-brand-800 to-brand-900',
+  },
+  {
+    id: 'valores-8',
+    category: 'valores',
+    title: 'Acessibilidade em primeiro lugar',
+    caption: 'Elevador próprio garante que toda a estrutura do instituto seja acessível a todos.',
+    alt: 'Porta do elevador de acessibilidade do IEAM, sinalizada com o símbolo internacional de acesso para cadeirantes.',
+    image: elevadorAcessibilidadeJpg,
+    imageWebp: elevadorAcessibilidadeWebp,
+    gradient: 'from-brand-800 via-brand-900 to-brand-950',
+  },
+  {
+    id: 'valores-9',
+    category: 'valores',
+    title: 'Hora do lanche',
+    caption: 'A cantina é ponto de encontro e descontração entre uma aula e outra.',
+    alt: 'Alunos reunidos na fila da cantina do IEAM, sob o letreiro "A Hora do Lanche".',
+    image: cantinaJpg,
+    imageWebp: cantinaWebp,
+    gradient: 'from-brand-600 via-brand-800 to-brand-950',
   },
 ];
