@@ -14,6 +14,7 @@ import {
   LineChart,
   Presentation,
   Wifi,
+  Brain,
 } from 'lucide-react';
 import type {
   Differential,
@@ -46,7 +47,7 @@ export const DIFFERENTIALS: Differential[] = [
   {
     icon: Target,
     title: 'Preparação para o seu futuro',
-    description: 'Programa intensivo de resolução, simulados e acompanhamento individualizado para chegar preparado a cada etapa decisiva.',
+    description: 'Programa intensivo de resolução, simulados e acompanhamento individualizado em todos os segmentos.',
   },
   {
     icon: FlaskConical,
@@ -73,6 +74,11 @@ export const DIFFERENTIALS: Differential[] = [
     title: 'Atividades extracurriculares',
     description: 'Arte, música e clubes de interesse para um desenvolvimento integral.',
   },
+  {
+    icon: Brain,
+    title: 'Apoio psicológico',
+    description: 'Psicóloga escolar dedicada ao acompanhamento emocional e ao bem-estar dos alunos dentro do instituto.',
+  },
 ];
 
 export const EDUCATION_LEVELS: EducationLevel[] = [
@@ -89,7 +95,7 @@ export const EDUCATION_LEVELS: EducationLevel[] = [
     title: 'Ensino Fundamental',
     ageRange: '6 a 14 anos',
     description: 'Base sólida em todas as áreas do conhecimento, com foco em raciocínio, escrita e cidadania.',
-    highlights: ['Metodologia ativa', 'Projetos interdisciplinares', 'Acompanhamento individual'],
+    highlights: ['Metodologia ativa', 'BNCC e BNCC Computação', 'Projetos interdisciplinares', 'Acompanhamento individual'],
     icon: School,
   },
   {

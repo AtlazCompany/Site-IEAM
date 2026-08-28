@@ -74,6 +74,7 @@ const DOODLES: Record<string, { expression?: string; note?: string }> = {
   'Esportes': { note: 'vencer' },
   'Biblioteca': { note: 'ler' },
   'Atividades extracurriculares': { note: 'criar' },
+  'Apoio psicológico': { note: 'cuidar' },
 };
 
 interface DifferentialCardProps {

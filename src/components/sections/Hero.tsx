@@ -35,8 +35,8 @@ function useHeroParallax() {
 const INDICATORS = [
   { icon: GraduationCap, value: '+30 anos', label: 'de tradição' },
   { icon: School, value: 'Infantil ao Médio', label: 'níveis de ensino' },
-  { icon: Laptop, value: 'Metodologia', label: 'própria e ativa' },
-  { icon: Building2, value: 'Infraestrutura', label: 'moderna' },
+  { icon: Laptop, value: 'Metodologia', label: 'ativa · BNCC e BNCC Computação' },
+  { icon: Building2, value: 'Infraestrutura', label: 'própria e moderna' },
 ];
 
 export function Hero() {

@@ -32,22 +32,29 @@ export function Location() {
         {/* Assinatura decorativa ao lado do título — só onde sobra espaço
             real (o cabeçalho é max-w-2xl, então em telas largas fica uma
             faixa vazia à direita dele). Traçado à mão via SVG + GSAP
-            (StrokeText, porte da React Bits), cores da identidade do IEAM. */}
-        <StrokeText
-          text="Venha fazer parte da melhor!"
-          strokeColor="#c9a445"
-          fillColor="#142a22"
-          strokeWidth={1.4}
-          drawDuration={1.8}
-          fillDelay={0.15}
-          stagger={0.035}
-          fontSize={42}
-          fontWeight={700}
-          letterSpacing={-0.5}
-          trigger="mount"
-          fillMode="wipe"
-          className="hidden shrink-0 lg:block lg:w-[320px] xl:w-[380px]"
-        />
+            (StrokeText, porte da React Bits), cores da identidade do IEAM.
+            A largura/visibilidade fica neste wrapper, não na className do
+            StrokeText — o componente tem `.stroke-text { width: 100% }`
+            no próprio CSS, com a mesma especificidade de uma classe
+            Tailwind, então aplicar `lg:w-[...]` direto nele é uma disputa
+            de ordem de carregamento que pode perder. Aqui ele só herda
+            100% de um pai já do tamanho certo. */}
+        <div className="hidden shrink-0 lg:block lg:w-[320px] xl:w-[380px]">
+          <StrokeText
+            text="Venha fazer parte da maior!"
+            strokeColor="#c9a445"
+            fillColor="#142a22"
+            strokeWidth={1.4}
+            drawDuration={1.8}
+            fillDelay={0.15}
+            stagger={0.035}
+            fontSize={42}
+            fontWeight={700}
+            letterSpacing={-0.5}
+            trigger="mount"
+            fillMode="wipe"
+          />
+        </div>
       </div>
 
       <div className="mt-14 grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-stretch">
