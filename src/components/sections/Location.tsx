@@ -39,7 +39,7 @@ export function Location() {
             Tailwind, então aplicar `lg:w-[...]` direto nele é uma disputa
             de ordem de carregamento que pode perder. Aqui ele só herda
             100% de um pai já do tamanho certo. */}
-        <div className="hidden shrink-0 lg:block lg:w-[320px] xl:w-[380px]">
+        <div className="hidden shrink-0 lg:block lg:w-[220px] xl:w-[400px] 2xl:w-[460px]">
           <StrokeText
             text="Venha fazer parte da maior!"
             strokeColor="#c9a445"
