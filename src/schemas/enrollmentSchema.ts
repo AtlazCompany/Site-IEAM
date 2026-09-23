@@ -1,7 +1,7 @@
 import { z } from 'zod';
+import { phoneRegex } from '@/utils/phone';
+import { isEducationLevelId } from '@/types/enrollment';
 
-const phoneRegex = /^\(?\d{2}\)?\s?9?\d{4}-?\d{4}$/;
-const LEVEL_IDS = ['infantil', 'fundamental', 'medio'] as const;
 const CHANNELS = ['whatsapp', 'email', 'phone'] as const;
 
 /**
@@ -11,11 +11,9 @@ const CHANNELS = ['whatsapp', 'email', 'phone'] as const;
  */
 export const enrollmentSchema = z
   .object({
-    levelId: z
-      .string()
-      .refine((v): v is (typeof LEVEL_IDS)[number] => (LEVEL_IDS as readonly string[]).includes(v), {
-        message: 'Selecione um nível de ensino.',
-      }),
+    levelId: z.string().refine(isEducationLevelId, {
+      message: 'Selecione um nível de ensino.',
+    }),
     studentName: z.string().trim().min(3, 'Informe o nome completo do aluno.').max(120, 'Nome muito longo.'),
     birthDate: z
       .string()

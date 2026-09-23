@@ -6,6 +6,7 @@ import { ENROLLMENT_DEFAULT_VALUES, WIZARD_STEPS, type EnrollmentFormValues } fr
 import { loadEnrollmentDraft, saveEnrollmentDraft, clearEnrollmentDraft, hasMeaningfulDraftData } from '@/hooks/useEnrollmentDraft';
 import { submitEnrollment, getWhatsAppUrl } from '@/services/enrollmentService';
 import { trackEvent } from '@/services/analytics';
+import { trackMetaPixelEvent } from '@/services/metaPixel';
 import { ENROLLMENT_CONFIG } from '@/config/enrollment';
 
 export type SubmitOutcome =
@@ -115,6 +116,7 @@ export function useEnrollmentWizard({ initialLevel, origin, active }: UseEnrollm
         setSubmitOutcome({ kind: 'not-configured' });
       } else if (result.apiSent) {
         trackEvent({ name: 'enrollment_form_submitted', channel: values.contactChannel });
+        trackMetaPixelEvent('Lead', { content_name: 'matricula' });
         clearEnrollmentDraft();
         setSubmitOutcome({ kind: 'api-success' });
       } else {

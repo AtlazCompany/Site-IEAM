@@ -8,6 +8,7 @@ import { Button, InputField, SelectField, TextareaField } from '@/components/ui'
 import { scheduleVisitSchema, SCHEDULE_VISIT_DEFAULT_VALUES, VISIT_TIME_OPTIONS, type ScheduleVisitSchema } from '@/schemas/scheduleVisitSchema';
 import { submitScheduleVisit } from '@/services/scheduleVisitService';
 import { trackEvent } from '@/services/analytics';
+import { trackMetaPixelEvent } from '@/services/metaPixel';
 import { SITE } from '@/constants/site';
 
 const FOCUSABLE_SELECTOR =
@@ -94,6 +95,7 @@ export function ScheduleVisitModal({ origin, onExited }: ScheduleVisitModalProps
     setFeedback(result.message);
     if (result.success) {
       trackEvent({ name: 'enrollment_form_submitted', channel: 'visita' });
+      trackMetaPixelEvent('Lead', { content_name: 'agendamento-visita' });
       setStatus('success');
     } else {
       setStatus('error');
@@ -144,7 +146,7 @@ export function ScheduleVisitModal({ origin, onExited }: ScheduleVisitModalProps
                   type="button"
                   onClick={close}
                   aria-label="Fechar formulário de agendamento"
-                  className="flex h-9 w-9 items-center justify-center rounded-full text-ink-500 transition-colors hover:bg-ink-100 hover:text-ink-900"
+                  className="flex h-11 w-11 items-center justify-center rounded-full text-ink-500 transition-colors hover:bg-ink-100 hover:text-ink-900"
                 >
                   <X className="h-5 w-5" />
                 </button>

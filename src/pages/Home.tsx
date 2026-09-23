@@ -2,14 +2,15 @@ import { lazy } from 'react';
 import { Seo } from '@/components/layout/Seo';
 import { DeferredSection } from '@/components/ui';
 // Import direto do arquivo, não do barrel `@/components/sections` — o
-// barrel reexporta as 14 seções num só módulo, e isso é o que fazia o
+// barrel reexporta as 15 seções num só módulo, e isso é o que fazia o
 // Rollup fundir tudo num único chunk mesmo com `lazy()` abaixo: bastava
 // UM import estático do barrel (para pegar Hero/Differentials/etc.) para
 // arrastar Methodology/Infrastructure/Stats/... junto, porque o bundler
 // trata o barrel inteiro como uma unidade só. Importando cada seção do seu
-// próprio arquivo, só as 4 realmente usadas de imediato entram no chunk
+// próprio arquivo, só as 5 realmente usadas de imediato entram no chunk
 // eager da Home.
 import { Hero } from '@/components/sections/Hero';
+import { ScholarshipTestBanner } from '@/components/sections/ScholarshipTestBanner';
 import { Differentials } from '@/components/sections/Differentials';
 import { About } from '@/components/sections/About';
 import { EducationLevels } from '@/components/sections/EducationLevels';
@@ -60,6 +61,7 @@ export default function Home() {
         volta assim que tivermos depoimentos confirmados pela instituição.
       */}
       <Hero />
+      <ScholarshipTestBanner />
       <Differentials />
       <About />
       <EducationLevels />

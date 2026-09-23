@@ -33,6 +33,14 @@ import newsTecnologiaWebp from '@/assets/news/foto noticia Tecnologia e inovaç�
 import newsNovidadesImg from '@/assets/news/foto noticia Acompanhe as novidades do IEAM.png';
 import newsNovidadesWebp from '@/assets/news/foto noticia Acompanhe as novidades do IEAM.webp';
 
+/**
+ * Teste Bolsa — data e horário ainda não confirmados pela secretaria.
+ * Atualize `period` assim que a escola divulgar (ex: "16 de novembro, 9h").
+ */
+export const SCHOLARSHIP_TEST = {
+  period: 'Data a divulgar em breve',
+};
+
 export const DIFFERENTIALS: Differential[] = [
   {
     icon: Users,

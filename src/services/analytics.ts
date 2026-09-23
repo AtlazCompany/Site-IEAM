@@ -10,7 +10,9 @@ type EnrollmentEvent =
   | { name: 'enrollment_form_abandoned'; step: number; stepId: string }
   | { name: 'enrollment_form_submitted'; channel: string }
   | { name: 'whatsapp_opened'; origin: string }
-  | { name: 'contact_button_clicked'; origin: string };
+  | { name: 'contact_button_clicked'; origin: string }
+  | { name: 'scholarship_test_form_opened'; origin: string }
+  | { name: 'scholarship_test_form_submitted' };
 
 export function trackEvent(event: EnrollmentEvent) {
   const dataLayer = (window as unknown as { dataLayer?: unknown[] }).dataLayer;

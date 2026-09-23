@@ -1,4 +1,5 @@
 export { Hero } from './Hero';
+export { ScholarshipTestBanner } from './ScholarshipTestBanner';
 export { Differentials } from './Differentials';
 export { About } from './About';
 export { EducationLevels } from './EducationLevels';

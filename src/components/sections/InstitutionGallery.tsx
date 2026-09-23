@@ -135,7 +135,7 @@ export function InstitutionGallery({ activeCategory, className }: InstitutionGal
             type="button"
             onClick={() => setLightboxOpen(true)}
             aria-label="Ver foto em tela cheia"
-            className="pointer-events-auto absolute right-3 top-4 z-[3] flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:bg-white/25 focus-visible:opacity-100 group-hover/gallery:opacity-100 group-focus-within/gallery:opacity-100"
+            className="pointer-events-auto absolute right-3 top-4 z-[3] flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:bg-white/25 focus-visible:opacity-100 group-hover/gallery:opacity-100 group-focus-within/gallery:opacity-100"
           >
             <Maximize2 className="h-4 w-4" />
           </button>
@@ -188,7 +188,7 @@ export function InstitutionGallery({ activeCategory, className }: InstitutionGal
                     type="button"
                     onClick={() => sliderRef.current?.prev()}
                     aria-label="Slide anterior"
-                    className="pointer-events-auto absolute left-3 top-1/2 z-[3] flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:bg-white/25 focus-visible:opacity-100 group-hover/gallery:opacity-100 group-focus-within/gallery:opacity-100"
+                    className="pointer-events-auto absolute left-3 top-1/2 z-[3] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:bg-white/25 focus-visible:opacity-100 group-hover/gallery:opacity-100 group-focus-within/gallery:opacity-100"
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </button>
@@ -196,7 +196,7 @@ export function InstitutionGallery({ activeCategory, className }: InstitutionGal
                     type="button"
                     onClick={() => sliderRef.current?.next()}
                     aria-label="Próximo slide"
-                    className="pointer-events-auto absolute right-3 top-1/2 z-[3] flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:bg-white/25 focus-visible:opacity-100 group-hover/gallery:opacity-100 group-focus-within/gallery:opacity-100"
+                    className="pointer-events-auto absolute right-3 top-1/2 z-[3] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:bg-white/25 focus-visible:opacity-100 group-hover/gallery:opacity-100 group-focus-within/gallery:opacity-100"
                   >
                     <ChevronRight className="h-4 w-4" />
                   </button>

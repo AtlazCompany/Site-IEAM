@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "arial",
+        "createdAt": "2026-09-23T03:22:24.004Z",
+        "reason": "HTML email body font, not site UI — Arial/sans-serif is the standard safe choice for email client compatibility, matches existing pattern in api/enrollment.ts and api/schedule-visit.ts"
+      }
+    ]
+  }
+}

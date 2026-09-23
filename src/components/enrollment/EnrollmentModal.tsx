@@ -124,7 +124,7 @@ export function EnrollmentModal({ initialLevel, origin, onExited }: EnrollmentMo
                 type="button"
                 onClick={requestClose}
                 aria-label="Fechar formulário de matrícula"
-                className="flex h-9 w-9 items-center justify-center rounded-full text-ink-500 transition-colors hover:bg-ink-100 hover:text-ink-900"
+                className="flex h-11 w-11 items-center justify-center rounded-full text-ink-500 transition-colors hover:bg-ink-100 hover:text-ink-900"
               >
                 <X className="h-5 w-5" />
               </button>

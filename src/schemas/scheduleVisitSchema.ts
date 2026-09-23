@@ -1,6 +1,5 @@
 import { z } from 'zod';
-
-const phoneRegex = /^\(?\d{2}\)?\s?9?\d{4}-?\d{4}$/;
+import { phoneRegex } from '@/utils/phone';
 
 export const scheduleVisitSchema = z.object({
   name: z.string().trim().min(3, 'Informe seu nome completo.').max(120, 'Nome muito longo.'),
