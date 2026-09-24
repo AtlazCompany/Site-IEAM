@@ -23,13 +23,17 @@ function rosterKey(): string {
 
 let redis: Redis | null | undefined;
 
+/**
+ * A integração de storage da Vercel injeta o Redis (Upstash por baixo) com
+ * os nomes legados de "Vercel KV" (KV_REST_API_URL/TOKEN), não os nomes
+ * nativos do Upstash (UPSTASH_REDIS_REST_URL/TOKEN) que Redis.fromEnv()
+ * procura — por isso checamos os dois formatos.
+ */
 function getRedis(): Redis | null {
   if (redis === undefined) {
-    try {
-      redis = Redis.fromEnv();
-    } catch {
-      redis = null;
-    }
+    const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+    redis = url && token ? new Redis({ url, token }) : null;
   }
   return redis;
 }
