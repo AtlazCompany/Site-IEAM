@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from './_lib/types.js';
 import { sendNotificationEmail, renderFieldsTable } from './_lib/resend.js';
 import { getClientIp, isRateLimited } from './_lib/rateLimit.js';
+import { buildScholarshipTestPdf } from './_lib/scholarshipPdf.js';
 
 /** Espelha o formato produzido por buildScholarshipTestPayload() em src/services/scholarshipTestService.ts. */
 interface ScholarshipTestBody {
@@ -46,10 +47,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     ])}
   `;
 
+  const pdf = buildScholarshipTestPdf({
+    level: body.level ?? '',
+    grade: body.grade ?? '',
+    studentName,
+    birthDate: body.student?.birthDate ?? '',
+    guardianName,
+    relationship: body.guardian?.relationship ?? '',
+    phone: guardianPhone,
+    email: body.guardian?.email ?? '',
+  });
+  const pdfFileName = `ficha-teste-bolsa-${studentName.toLowerCase().replace(/\s+/g, '-')}.pdf`;
+
   const result = await sendNotificationEmail({
     subject: `[Site IEAM] Nova inscrição — Teste Bolsa — ${studentName}`,
     html,
     replyTo: body.guardian?.email || undefined,
+    attachments: [{ filename: pdfFileName, content: pdf }],
   });
 
   if (!result.ok) {

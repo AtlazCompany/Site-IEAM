@@ -33,12 +33,7 @@ import newsTecnologiaWebp from '@/assets/news/foto noticia Tecnologia e inovaç�
 import newsNovidadesImg from '@/assets/news/foto noticia Acompanhe as novidades do IEAM.png';
 import newsNovidadesWebp from '@/assets/news/foto noticia Acompanhe as novidades do IEAM.webp';
 
-export const SCHOLARSHIP_TEST = {
-  date: '24 de outubro de 2026',
-  time: '8h às 10h',
-  location: 'No próprio Instituto Educacional Afonso Mafrense',
-  period: '24 de outubro, das 8h às 10h — no próprio Instituto',
-};
+export { SCHOLARSHIP_TEST } from './scholarshipTest';
 
 export const DIFFERENTIALS: Differential[] = [
   {

@@ -20,6 +20,7 @@ export interface SendEmailInput {
   subject: string;
   html: string;
   replyTo?: string;
+  attachments?: { filename: string; content: Buffer }[];
 }
 
 export interface SendEmailResult {
@@ -27,7 +28,7 @@ export interface SendEmailResult {
   error?: string;
 }
 
-export async function sendNotificationEmail({ subject, html, replyTo }: SendEmailInput): Promise<SendEmailResult> {
+export async function sendNotificationEmail({ subject, html, replyTo, attachments }: SendEmailInput): Promise<SendEmailResult> {
   if (!RESEND_API_KEY) {
     return { ok: false, error: 'RESEND_API_KEY não configurada no servidor.' };
   }
@@ -44,6 +45,7 @@ export async function sendNotificationEmail({ subject, html, replyTo }: SendEmai
       subject,
       html,
       replyTo,
+      attachments,
     });
 
     if (error) {

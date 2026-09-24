@@ -1,6 +1,5 @@
-import { EDUCATION_LEVELS, SCHOLARSHIP_TEST } from '@/constants/content';
+import { EDUCATION_LEVELS } from '@/constants/content';
 import { RELATIONSHIP_OPTIONS } from '@/config/enrollmentOptions';
-import { SITE } from '@/constants/site';
 import type { ScholarshipTestSchema } from '@/schemas/scholarshipTestSchema';
 
 export interface ScholarshipTestResult {
@@ -58,69 +57,4 @@ export async function submitScholarshipTest(values: ScholarshipTestSchema): Prom
   } catch {
     return { success: false, message: 'Falha de conexão. Verifique sua internet e tente novamente.' };
   }
-}
-
-/**
- * Ficha de inscrição em PDF — baixada no navegador de quem preenche o
- * formulário, para levar impressa (ou anexar por WhatsApp/e-mail) à
- * secretaria. Gerada no cliente: o site não tem armazenamento persistente
- * das inscrições, então cada ficha é independente, sem lista acumulada.
- *
- * `jspdf` (~130kB gzip) é importado dinamicamente aqui, não no topo do
- * arquivo — assim ele só é baixado quando alguém realmente clica em "baixar
- * PDF" (depois de inscrito), em vez de inflar o chunk do modal para todo
- * mundo que apenas abre o formulário.
- */
-export async function generateScholarshipTestPdf(values: ScholarshipTestSchema): Promise<void> {
-  const { jsPDF } = await import('jspdf');
-  const doc = new jsPDF({ unit: 'pt', format: 'a4' });
-  const marginX = 56;
-  let y = 64;
-
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(16);
-  doc.text('Ficha de Inscrição — Teste Bolsa', marginX, y);
-
-  y += 20;
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(11);
-  doc.text(SITE.name, marginX, y);
-
-  y += 32;
-  doc.setDrawColor(200);
-  doc.line(marginX, y, 595 - marginX, y);
-  y += 28;
-
-  const rows: [string, string][] = [
-    ['Nível de ensino', levelLabel(values.levelId)],
-    ['Série / ano pretendido', values.grade],
-    ['Aluno', values.studentName],
-    ['Data de nascimento', values.birthDate ? formatBirthDate(values.birthDate) : ''],
-    ['Responsável', values.guardianName],
-    ['Parentesco', labelFor(RELATIONSHIP_OPTIONS, values.relationship)],
-    ['Telefone / WhatsApp', values.phone],
-    ['E-mail', values.email],
-    ['Data da inscrição', new Date().toLocaleString('pt-BR')],
-  ];
-
-  doc.setFontSize(12);
-  for (const [label, value] of rows) {
-    doc.setFont('helvetica', 'bold');
-    doc.text(`${label}:`, marginX, y);
-    doc.setFont('helvetica', 'normal');
-    doc.text(value || '—', marginX + 170, y);
-    y += 24;
-  }
-
-  y += 16;
-  doc.setFontSize(10);
-  doc.setTextColor(120);
-  doc.text(
-    `Teste em ${SCHOLARSHIP_TEST.date}, das ${SCHOLARSHIP_TEST.time}. ${SCHOLARSHIP_TEST.location}.`,
-    marginX,
-    y,
-  );
-
-  const fileName = `ficha-teste-bolsa-${values.studentName.trim().toLowerCase().replace(/\s+/g, '-')}.pdf`;
-  doc.save(fileName);
 }

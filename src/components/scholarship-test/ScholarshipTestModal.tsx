@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { X, GraduationCap, Loader2, CheckCircle2, AlertTriangle, MessageCircle, ShieldCheck, Download } from 'lucide-react';
+import { X, GraduationCap, Loader2, CheckCircle2, AlertTriangle, MessageCircle, ShieldCheck } from 'lucide-react';
 import { Button, InputField, SelectField } from '@/components/ui';
 import { cn } from '@/utils/cn';
 import {
@@ -15,7 +15,7 @@ import {
   type ScholarshipTestSchema,
   type ScholarshipTestFormValues,
 } from '@/schemas/scholarshipTestSchema';
-import { submitScholarshipTest, generateScholarshipTestPdf } from '@/services/scholarshipTestService';
+import { submitScholarshipTest } from '@/services/scholarshipTestService';
 import { EDUCATION_LEVELS, SCHOLARSHIP_TEST } from '@/constants/content';
 import { trackEvent } from '@/services/analytics';
 import { trackMetaPixelEvent } from '@/services/metaPixel';
@@ -38,14 +38,11 @@ export function ScholarshipTestModal({ origin, onExited }: ScholarshipTestModalP
   const [visible, setVisible] = useState(true);
   const [status, setStatus] = useState<Status>('idle');
   const [feedback, setFeedback] = useState('');
-  const [pdfDownloaded, setPdfDownloaded] = useState(false);
-  const [pdfError, setPdfError] = useState(false);
 
   const {
     register,
     handleSubmit,
     watch,
-    getValues,
     formState: { errors },
   } = useForm<ScholarshipTestFormValues>({
     resolver: zodResolver(scholarshipTestSchema),
@@ -119,16 +116,6 @@ export function ScholarshipTestModal({ origin, onExited }: ScholarshipTestModalP
     }
   }
 
-  async function handleDownloadPdf() {
-    setPdfError(false);
-    try {
-      await generateScholarshipTestPdf(getValues() as ScholarshipTestSchema);
-      setPdfDownloaded(true);
-    } catch {
-      setPdfError(true);
-    }
-  }
-
   const todayISO = new Date().toISOString().slice(0, 10);
 
   return createPortal(
@@ -196,20 +183,7 @@ export function ScholarshipTestModal({ origin, onExited }: ScholarshipTestModalP
                       O teste será no dia {SCHOLARSHIP_TEST.date}, das {SCHOLARSHIP_TEST.time}, {SCHOLARSHIP_TEST.location.toLowerCase()}.
                     </p>
                     <div className="mt-6 flex w-full max-w-xs flex-col gap-2">
-                      <Button
-                        variant="primary"
-                        className="w-full"
-                        onClick={handleDownloadPdf}
-                        icon={<Download className="h-4 w-4" />}
-                      >
-                        {pdfDownloaded ? 'Baixar novamente a ficha' : 'Baixar ficha de inscrição (PDF)'}
-                      </Button>
-                      {pdfError && (
-                        <p className="text-xs font-medium text-red-500">
-                          Não foi possível gerar o PDF agora. Verifique sua internet e tente novamente.
-                        </p>
-                      )}
-                      <Button variant="ghost" className="w-full" onClick={close}>
+                      <Button variant="primary" className="w-full" onClick={close}>
                         Fechar
                       </Button>
                     </div>
