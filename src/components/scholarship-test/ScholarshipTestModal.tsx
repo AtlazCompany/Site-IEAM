@@ -213,7 +213,8 @@ export function ScholarshipTestModal({ origin, onExited }: ScholarshipTestModalP
                 ) : (
                   <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-5">
                     <p className="text-sm text-ink-500">
-                      Preencha os dados do aluno e do responsável para garantir a vaga no Teste Bolsa.
+                      Preencha os dados do aluno e do responsável para garantir a vaga no Teste Bolsa —{' '}
+                      {SCHOLARSHIP_TEST.scope.toLowerCase()}.
                     </p>
 
                     <SelectField label="Nível de ensino" id="scholarship-level" error={errors.levelId?.message} {...register('levelId')}>

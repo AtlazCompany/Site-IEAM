@@ -8,4 +8,5 @@ export const SCHOLARSHIP_TEST = {
   time: '8h às 10h',
   location: 'No próprio Instituto Educacional Afonso Mafrense',
   period: '24 de outubro, das 8h às 10h — no próprio Instituto',
+  scope: 'Do Infantil (a partir dos 2 anos) ao Ensino Médio',
 };

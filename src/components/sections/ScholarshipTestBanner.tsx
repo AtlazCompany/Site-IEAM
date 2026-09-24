@@ -30,6 +30,10 @@ export function ScholarshipTestBanner() {
                 <CalendarClock className="h-4 w-4 shrink-0" />
                 {SCHOLARSHIP_TEST.period}
               </p>
+              <p className="mt-0.5 flex items-center justify-center gap-1.5 text-sm text-white/60 sm:justify-start">
+                <GraduationCap className="h-4 w-4 shrink-0" />
+                {SCHOLARSHIP_TEST.scope}
+              </p>
             </div>
           </div>
 
