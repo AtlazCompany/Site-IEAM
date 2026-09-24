@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from './_lib/types.js';
 import { sendNotificationEmail, renderFieldsTable } from './_lib/resend.js';
 import { getClientIp, isRateLimited } from './_lib/rateLimit.js';
-import { buildScholarshipTestPdf } from './_lib/scholarshipPdf.js';
+import { appendToRoster, buildScholarshipRosterPdf } from './_lib/scholarshipRoster.js';
 
 /** Espelha o formato produzido por buildScholarshipTestPayload() em src/services/scholarshipTestService.ts. */
 interface ScholarshipTestBody {
@@ -47,23 +47,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     ])}
   `;
 
-  const pdf = buildScholarshipTestPdf({
-    level: body.level ?? '',
-    grade: body.grade ?? '',
+  const roster = await appendToRoster({
     studentName,
-    birthDate: body.student?.birthDate ?? '',
+    grade: body.grade ?? '',
     guardianName,
-    relationship: body.guardian?.relationship ?? '',
     phone: guardianPhone,
-    email: body.guardian?.email ?? '',
+    submittedAt: new Date().toISOString(),
   });
-  const pdfFileName = `ficha-teste-bolsa-${studentName.toLowerCase().replace(/\s+/g, '-')}.pdf`;
+  const pdf = buildScholarshipRosterPdf(roster);
 
   const result = await sendNotificationEmail({
     subject: `[Site IEAM] Nova inscrição — Teste Bolsa — ${studentName}`,
     html,
     replyTo: body.guardian?.email || undefined,
-    attachments: [{ filename: pdfFileName, content: pdf }],
+    attachments: [{ filename: 'lista-inscritos-teste-bolsa.pdf', content: pdf }],
   });
 
   if (!result.ok) {
