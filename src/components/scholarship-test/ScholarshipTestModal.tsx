@@ -16,7 +16,7 @@ import {
   type ScholarshipTestFormValues,
 } from '@/schemas/scholarshipTestSchema';
 import { submitScholarshipTest, generateScholarshipTestPdf } from '@/services/scholarshipTestService';
-import { EDUCATION_LEVELS } from '@/constants/content';
+import { EDUCATION_LEVELS, SCHOLARSHIP_TEST } from '@/constants/content';
 import { trackEvent } from '@/services/analytics';
 import { trackMetaPixelEvent } from '@/services/metaPixel';
 import { SITE } from '@/constants/site';
@@ -193,7 +193,7 @@ export function ScholarshipTestModal({ origin, onExited }: ScholarshipTestModalP
                     <h3 className="font-display mt-5 text-xl font-semibold text-ink-900">Inscrição confirmada!</h3>
                     <p className="mt-2 max-w-sm text-[15px] text-ink-500">{feedback}</p>
                     <p className="mt-1 max-w-sm text-xs text-ink-400">
-                      Data e horário do teste serão divulgados posteriormente pela secretaria.
+                      O teste será no dia {SCHOLARSHIP_TEST.date}, das {SCHOLARSHIP_TEST.time}, {SCHOLARSHIP_TEST.location.toLowerCase()}.
                     </p>
                     <div className="mt-6 flex w-full max-w-xs flex-col gap-2">
                       <Button

@@ -1,4 +1,4 @@
-import { EDUCATION_LEVELS } from '@/constants/content';
+import { EDUCATION_LEVELS, SCHOLARSHIP_TEST } from '@/constants/content';
 import { RELATIONSHIP_OPTIONS } from '@/config/enrollmentOptions';
 import { SITE } from '@/constants/site';
 import type { ScholarshipTestSchema } from '@/schemas/scholarshipTestSchema';
@@ -115,7 +115,11 @@ export async function generateScholarshipTestPdf(values: ScholarshipTestSchema):
   y += 16;
   doc.setFontSize(10);
   doc.setTextColor(120);
-  doc.text('Data e horário do teste serão divulgados posteriormente pela secretaria.', marginX, y);
+  doc.text(
+    `Teste em ${SCHOLARSHIP_TEST.date}, das ${SCHOLARSHIP_TEST.time}. ${SCHOLARSHIP_TEST.location}.`,
+    marginX,
+    y,
+  );
 
   const fileName = `ficha-teste-bolsa-${values.studentName.trim().toLowerCase().replace(/\s+/g, '-')}.pdf`;
   doc.save(fileName);
