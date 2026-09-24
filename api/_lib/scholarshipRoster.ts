@@ -41,7 +41,7 @@ function getRedis(): Redis | null {
 export interface AppendToRosterResult {
   entries: ScholarshipRosterEntry[];
   /** Diagnóstico temporário — remover depois de confirmar o Redis em produção. */
-  debug: { configured: boolean; error?: string };
+  debug: { configured: boolean; key?: string; rpushResult?: unknown; rawLength?: number; error?: string };
 }
 
 /** Adiciona a inscrição à lista do ciclo atual e retorna todas as inscrições até agora. */
@@ -50,16 +50,16 @@ export async function appendToRoster(entry: ScholarshipRosterEntry): Promise<App
   if (!client) {
     return { entries: [entry], debug: { configured: false } };
   }
+  const key = rosterKey();
   try {
-    const key = rosterKey();
-    await client.rpush(key, JSON.stringify(entry));
+    const rpushResult = await client.rpush(key, JSON.stringify(entry));
     const raw = await client.lrange<string>(key, 0, -1);
     const entries = raw.map((item) => (typeof item === 'string' ? (JSON.parse(item) as ScholarshipRosterEntry) : (item as ScholarshipRosterEntry)));
-    return { entries, debug: { configured: true } };
+    return { entries, debug: { configured: true, key, rpushResult, rawLength: raw.length } };
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error('Falha ao atualizar a lista de inscrições no Redis:', err);
-    return { entries: [entry], debug: { configured: true, error: message } };
+    return { entries: [entry], debug: { configured: true, key, error: message } };
   }
 }
 
