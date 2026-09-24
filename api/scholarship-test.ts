@@ -47,7 +47,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     ])}
   `;
 
-  const { entries: roster, debug } = await appendToRoster({
+  const roster = await appendToRoster({
     studentName,
     grade: body.grade ?? '',
     guardianName,
@@ -68,6 +68,5 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  // TODO(temporário): remover _debug depois de confirmar o Redis em produção.
-  res.status(200).json({ success: true, message: 'Inscrição no Teste Bolsa enviada com sucesso.', _debug: debug });
+  res.status(200).json({ success: true, message: 'Inscrição no Teste Bolsa enviada com sucesso.' });
 }
