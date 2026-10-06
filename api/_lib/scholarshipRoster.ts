@@ -12,13 +12,12 @@ export interface ScholarshipRosterEntry {
 }
 
 /**
- * A chave embute a data do teste (SCHOLARSHIP_TEST.date) — assim, quando a
- * escola abrir o próximo Teste Bolsa e essa data for atualizada em
- * scholarshipTest.ts, a lista começa vazia automaticamente, sem precisar de
- * reset manual no Redis.
+ * A chave usa SCHOLARSHIP_TEST.cycle, não a data — assim um adiamento
+ * preserva os inscritos, e ao abrir o próximo Teste Bolsa basta trocar o
+ * cycle em scholarshipTest.ts para a lista começar vazia, sem reset manual.
  */
 function rosterKey(): string {
-  return `scholarship-test:${SCHOLARSHIP_TEST.date}`;
+  return `scholarship-test:${SCHOLARSHIP_TEST.cycle}`;
 }
 
 let redis: Redis | null | undefined;
