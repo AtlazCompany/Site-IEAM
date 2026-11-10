@@ -7,9 +7,9 @@ export const SCHOLARSHIP_TEST = {
   // Identifica a lista de inscritos no Redis. Só mude ao abrir um novo ciclo;
   // num adiamento, mude apenas a data para preservar os inscritos.
   cycle: '24 de outubro de 2026',
-  date: '31 de outubro de 2026',
+  date: '5 de dezembro de 2026',
   time: '8h às 10h',
   location: 'No próprio Instituto Educacional Afonso Mafrense',
-  period: '31 de outubro, das 8h às 10h — no próprio Instituto',
+  period: '5 de dezembro, das 8h às 10h — no próprio Instituto',
   scope: 'Do Infantil (a partir dos 2 anos) ao Ensino Médio',
 };
